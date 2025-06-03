@@ -1,57 +1,65 @@
-import { useState, type FormEvent } from "react";
-import { useAuth } from "../../shared/hooks/useAuth";
-import { Navigate, useNavigate } from "react-router";
+import { useState } from 'react';
 
-export const Auth = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+import '../../App.css';
+import { authService } from '../../shared/auth';
 
-    const { login, user, isLoading } = useAuth();
+export function Auth() {
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    const navigate = useNavigate();
-
-    const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Here you would usually send a request to your backend to authenticate the user
-        // For the sake of this example, we're using a mock authentication
-        if (username === "user" && password === "password") {
-            // Replace with actual authentication logic
-            login(username);
-            navigate("/", { replace: true });
-        } else {
-            alert("Invalid username or password");
+        setError('');
+        setLoading(true);
+
+        try {
+            const response = await authService.login({ login, password });
+            // Handle successful login here
+            console.log('Login successful:', response);
+            // You might want to store the token in localStorage or context
+            if (response.token) {
+                localStorage.setItem('token', response.token);
+                // Add navigation logic here if needed
+            }
+        } catch (err) {
+            setError('Login failed. Please check your credentials.');
+            console.error('Login error:', err);
+        } finally {
+            setLoading(false);
         }
     };
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
-    if (user) {
-        return <Navigate to="/" replace />;
-    }
-
     return (
-        <form onSubmit={handleLogin}>
-            <div>
-                <label htmlFor="username">Username:</label>
-                <input
-                    id="username"
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-            </div>
-            <div>
-                <label htmlFor="password">Password:</label>
-                <input
-                    id="password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </div>
-            <button type="submit">Login</button>
-        </form>
-    )
-}
+        <div className="login-container">
+            <form onSubmit={handleSubmit} className="login-form">
+                <h2>Login</h2>
+                {error && <div className="error-message">{error}</div>}
+                <div className="form-group">
+                    <label htmlFor="login">Login:</label>
+                    <input
+                        type="text"
+                        id="login"
+                        value={login}
+                        onChange={(e) => setLogin(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="password">Password:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                <button type="submit" disabled={loading}>
+                    {loading ? 'Logging in...' : 'Login'}
+                </button>
+            </form>
+        </div>
+    );
+} 

@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.example.com'; // Базовый URL API
+const BASE_URL = 'http://194.87.74.158:8080/api/v1'; // Base API URL
 
 export interface ApiRequest {
     endpoint: string;
