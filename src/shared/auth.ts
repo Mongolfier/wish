@@ -17,11 +17,11 @@ export const authService = {
                 endpoint: '/login',
                 method: 'POST',
                 data: credentials
-            });
+            }) as LoginResponse;
             return response;
         } catch (error) {
             console.error('Login error:', error);
-            throw error;
+            throw new Error('Login failed');
         }
     }
 }; 

@@ -6,12 +6,13 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 
 const mode = import.meta.env.MODE;
 
-i18n
+void i18n
   .use(Backend)
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     fallbackLng: 'ru',
+    supportedLngs: ['ru', 'en'],
     debug: mode === 'development',
 
     backend: {

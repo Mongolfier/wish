@@ -23,9 +23,11 @@ export async function apiRequest({ endpoint, method = 'GET', data = null, header
   try {
     const response = await fetch(url, config);
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      const errorData = await response.json().catch(() => null) as Record<string, unknown> | null;
+      throw new Error(`HTTP error! Status: ${response.status}${errorData ? ` - ${JSON.stringify(errorData)}` : ''}`);
     }
-    return await response.json();
+    const data: unknown = await response.json();
+    return data;
   } catch (error) {
     console.error('API Error:', error);
     throw error;

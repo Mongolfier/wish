@@ -1,16 +1,22 @@
 import { RouterProvider } from 'react-router';
-
-import './App.css';
+import { Layout } from './widgets/Layout';
 import { router } from './shared/router';
 import { AuthProvider } from './shared/providers/AuthProvider';
+import { Providers } from './app/providers/Providers';
+import './shared/config/i18n/i18n';
 
+import './App.css';
 
 function App() {
   return (
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
-  )
+    <Providers>
+      <AuthProvider>
+        <Layout>
+          <RouterProvider router={router} />
+        </Layout>
+      </AuthProvider>
+    </Providers>
+  );
 }
 
-export default App
+export default App;
