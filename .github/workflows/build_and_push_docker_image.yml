@@ -1,0 +1,32 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "feature/github-actions" ]
+  pull_request:
+    branches: [ "feature/github-actions" ]
+
+jobs:
+
+  build_and_push_image:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Add registry to /etc/hosts
+      run: echo "${{ secrets.SERVER_URL }} {{ secrets.REGISTRY }}" | sudo tee -a /etc/hosts
+    
+    - name: Install CA certificate
+      run: |
+        sudo mkdir -p /etc/docker/certs.d/{{ secrets.REGISTRY }}:5000
+        echo "${{ secrets.CA_CERT }}" | sudo tee /etc/docker/certs.d/{{ secrets.REGISTRY }}:5000/ca.crt
+
+    - name: Build Docker image
+      run: |
+        VERSION=$(date +%s)
+        docker build . --file Dockerfile --tag {{ secrets.REGISTRY }}:5000/wish-react-app:$VERSION
+
+    - name: Push Docker image
+      run: docker push {{ secrets.REGISTRY }}:5000/wish-react-app:$VERSION
