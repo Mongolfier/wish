@@ -25,10 +25,8 @@ jobs:
         sudo mkdir -p /etc/docker/certs.d/${{ vars.REGISTRY}}:5000
         echo "$CA_CERT" | sudo tee /etc/docker/certs.d/${{ vars.REGISTRY}}:5000/ca.crt
 
-    - name: Build Docker image
+    - name: Build and push Docker image
       run: |
         VERSION=$(date +%s)
         docker build . --file Dockerfile --tag ${{ vars.REGISTRY}}:5000/wish-react-app:$VERSION
-
-    - name: Push Docker image
-      run: docker push ${{ vars.REGISTRY}}:5000/wish-react-app:$VERSION
+        run: docker push ${{ vars.REGISTRY}}:5000/wish-react-app:$VERSION 
