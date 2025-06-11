@@ -43,7 +43,7 @@ jobs:
         with:
           host: ${{ vars.SERVER_URL }}
           username: deploy
-          key: ${{ secrets.SSH_PRIVATE_SSH_KEY }}
+          key: ${{ secrets.SERVER_PRIVATE_SSH_KEY }}
           script: |
             cd /app/wish
             docker-compose pull
