@@ -41,6 +41,8 @@ jobs:
       - name: Pull and run latest wish app image
         uses: appleboy/ssh-action@v1
         with:
+          host: ${{ vars.SERVER_URL }}
+          username: deploy
           key: ${{ secrets.SSH_PRIVATE_SSH_KEY }}
           script: |
             cd /app/wish
