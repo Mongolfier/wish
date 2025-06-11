@@ -21,9 +21,14 @@ jobs:
     - name: Install CA certificate
       run: |
         sudo mkdir -p /etc/docker/certs.d/${{ vars.REGISTRY }}:5000
-        echo "$CA_CERT" | sudo tee /etc/docker/certs.d/${{ vars.REGISTRY }}:5000/ca.crt
-      env:
-        CA_CERT: ${{ secrets.CA_CERT }}
+        echo "${{ secrets.CA_CERT }}" | sudo tee /etc/docker/certs.d/${{ vars.REGISTRY }}:5000/ca.crt
+        sudo systemctl restart docker
+
+    - name: Debug certificates
+      run: |
+        ls -la /etc/docker/certs.d/
+        ls -la /etc/docker/certs.d/ruvds-pyny6:5000/
+        openssl x509 -in /etc/docker/certs.d/${{ vars.REGISTRY }}:5000/ca.crt -text -noout
 
     - name: Build and push Docker image
       run: |
