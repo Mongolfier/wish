@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Add {{ vars.REGISTRY }} to /etc/hosts
+    - name: Add registry to /etc/hosts
       run: echo "${{ vars.SERVER_URL }} ${{ vars.REGISTRY }}" | sudo tee -a /etc/hosts
     
     - name: Install CA certificate
