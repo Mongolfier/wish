@@ -15,18 +15,18 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Add {{ vars.REGISTRY}} to /etc/hosts
-      run: echo "${{ vars.SERVER_URL }} ${{ vars.REGISTRY}}" | sudo tee -a /etc/hosts
+    - name: Add {{ vars.REGISTRY }} to /etc/hosts
+      run: echo "${{ vars.SERVER_URL }} ${{ vars.REGISTRY }}" | sudo tee -a /etc/hosts
     
     - name: Install CA certificate
+      run: |
+        sudo mkdir -p /etc/docker/certs.d/${{ vars.REGISTRY }}:5000
+        echo "$CA_CERT" | sudo tee /etc/docker/certs.d/${{ vars.REGISTRY }}:5000/ca.crt
       env:
         CA_CERT: ${{ secrets.CA_CERT }}
-      run: |
-        sudo mkdir -p /etc/docker/certs.d/${{ vars.REGISTRY}}:5000
-        echo "$CA_CERT" | sudo tee /etc/docker/certs.d/${{ vars.REGISTRY}}:5000/ca.crt
 
     - name: Build and push Docker image
       run: |
         VERSION=$(date +%s)
-        docker build . --file Dockerfile --tag ${{ vars.REGISTRY}}:5000/wish-react-app:$VERSION
-        docker push ${{ vars.REGISTRY}}:5000/wish-react-app:$VERSION 
+        docker build . --file Dockerfile --tag ${{ vars.REGISTRY }}:5000/wish-react-app:$VERSION
+        docker push ${{ vars.REGISTRY }}:5000/wish-react-app:$VERSION 
