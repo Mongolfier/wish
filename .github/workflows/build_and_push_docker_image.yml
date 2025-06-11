@@ -28,4 +28,21 @@ jobs:
       run: |
         VERSION=$(date +%s)
         docker build . --file Dockerfile --tag ${{ vars.REGISTRY }}:5000/wish-react-app:$VERSION
-        docker push ${{ vars.REGISTRY }}:5000/wish-react-app:$VERSION 
+        docker tag ${{ vars.REGISTRY }}:5000/wish-react-app:$VERSION ${{ vars.REGISTRY }}:5000/wish-react-app:latest
+        docker push --all-tags ${{ vars.REGISTRY }}:5000/wish-react-app
+
+  deploy_to_server:
+
+    needs: build_and_push_image
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Pull and run latest wish app image
+        uses: appleboy/ssh-action@v1
+        with:
+          key: ${{ secrets.SSH_PRIVATE_SSH_KEY }}
+          script: |
+            cd /app/wish
+            docker-compose pull
+            docker-compose up -d
