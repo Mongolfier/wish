@@ -44,5 +44,5 @@ jobs:
           key: ${{ secrets.SERVER_PRIVATE_SSH_KEY }}
           script: |
             cd /app/wish
-            docker-compose pull
-            docker-compose up -d
+            docker compose pull
+            docker compose up -d
