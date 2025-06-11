@@ -37,6 +37,7 @@ export function Auth() {
         <div className="login-container">
             <form onSubmit={handleSubmit} className="login-form">
                 <h2>{t('auth:login')}</h2>
+                1111111111
                 {error && <div className="error-message">{t('auth:loginError')}</div>}
                 <div className="form-group">
                     <label htmlFor="login">{t('auth:login')}:</label>
