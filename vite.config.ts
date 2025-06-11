@@ -11,5 +11,12 @@ export default defineConfig({
   preview: {
     port: 3000
   },
-  base: '/'
+  base: '/',
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
+  }
 })
