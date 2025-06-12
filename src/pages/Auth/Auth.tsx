@@ -5,7 +5,7 @@ import { authService } from '../../shared/auth';
 import { useTranslation } from 'react-i18next';
 
 export function Auth() {
-    const [login, setLogin] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -17,7 +17,7 @@ export function Auth() {
         setError('');
         setLoading(true);
 
-        void authService.login({ login, password })
+        void authService.login({ username, password })
             .then((response) => {
                 console.log('Login successful:', response);
                 if (response.token) {
@@ -36,15 +36,15 @@ export function Auth() {
     return (
         <div className="login-container">
             <form onSubmit={handleSubmit} className="login-form">
-                <h2>{t('auth:login')}</h2>
+                <h2>{t('auth:username')}</h2>
                 {error && <div className="error-message">{t('auth:loginError')}</div>}
                 <div className="form-group">
-                    <label htmlFor="login">{t('auth:login')}:</label>
+                    <label htmlFor="username">{t('auth:username')}:</label>
                     <input
                         type="text"
-                        id="login"
-                        value={login}
-                        onChange={(e) => setLogin(e.target.value)}
+                        id="username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                         required
                     />
                 </div>

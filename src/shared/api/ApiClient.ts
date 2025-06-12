@@ -22,8 +22,8 @@ export class ApiClient {
                 ...config.headers,
             },
         };
-        this.requestInterceptors = config.requestInterceptors || [];
-        this.responseInterceptors = config.responseInterceptors || [];
+        this.requestInterceptors = config.requestInterceptors ?? [];
+        this.responseInterceptors = config.responseInterceptors ?? [];
     }
 
     private async processRequestInterceptors(config: RequestConfig): Promise<RequestConfig> {
@@ -78,7 +78,7 @@ export class ApiClient {
 
         try {
             const response = await fetch(url, processedConfig);
-            const data = await response.json();
+            const data = await response.json() as T;
 
             const apiResponse: ApiResponse<T> = {
                 data,

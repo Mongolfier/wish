@@ -11,7 +11,6 @@ import { useAuth } from "../hooks/useAuth";
 const AuthRoute = (): ReactElement => {
   const { user } = useAuth();
 
-  // If user is authenticated, redirect to main page
   if (user) {
     return <Navigate to="/" replace />;
   }
