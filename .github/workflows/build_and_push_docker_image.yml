@@ -27,7 +27,9 @@ jobs:
         VERSION=$(date +%s)
         docker build . --file Dockerfile --tag ${{ secrets.REGISTRY }}:5000/wish-react-app:$VERSION
         docker tag ${{ secrets.REGISTRY }}:5000/wish-react-app:$VERSION ${{ secrets.REGISTRY }}:5000/wish-react-app:latest
+        docker login -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_PASS }} ${{ secrets.REGISTRY }}:5000
         docker push --all-tags ${{ secrets.REGISTRY }}:5000/wish-react-app
+        docker logout ${{ secrets.REGISTRY }}:5000
 
   deploy_to_server:
 
@@ -45,5 +47,7 @@ jobs:
           key: ${{ secrets.SERVER_PRIVATE_SSH_KEY }}
           script: |
             cd /app/wish
+            docker login -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_PASS }} ${{ secrets.REGISTRY }}:5000
             docker compose pull
             docker compose up -d
+            docker logout ${{ secrets.REGISTRY }}:5000
