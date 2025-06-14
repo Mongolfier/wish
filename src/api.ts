@@ -1,4 +1,4 @@
-const BASE_URL = 'http://194.87.74.158';
+const BASE_URL = 'http://77.223.98.221';
 
 export interface ApiRequest {
     endpoint: string;
