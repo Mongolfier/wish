@@ -1,0 +1,4 @@
+# Lock files
+**/*.json
+**/*.yaml
+**/*.lock
