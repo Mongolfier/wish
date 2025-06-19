@@ -10,3 +10,4 @@ export const isForbiddenRoute = (isAuthUser: boolean, pathname: string) => {
 
 	return unauthenticatedForbiddenRoutes.some((route) => pathname.includes(route));
 };
+ 
