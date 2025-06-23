@@ -25,6 +25,8 @@ i18next
 		...getI18nConfig(),
 		detection: {
 			order: ['path', 'navigator'],
+			lookupFromPathIndex: 0,
+			lookupFromSubdomainIndex: 0,
 		},
 		preload: [],
 	});
@@ -43,6 +45,13 @@ export function useTranslation<Ns extends FlatNamespace, KPrefix extends KeyPref
 
 	const ret = useTranslationOrg(ns, newOptions);
 	const { i18n } = ret;
+
+	// Synchronize language on both server and client side
+	useEffect(() => {
+		if (newOptions.lng && String(i18n.resolvedLanguage) !== String(newOptions.lng)) {
+			i18n.changeLanguage(newOptions.lng);
+		}
+	}, [newOptions.lng, i18n.resolvedLanguage, i18n]);
 
 	if (runsOnServerSide && newOptions.lng && String(i18n.resolvedLanguage) !== String(newOptions.lng)) {
 		i18n.changeLanguage(newOptions.lng);
@@ -77,6 +86,7 @@ const useIntlParams = () => {
 		i18next.changeLanguage(lng);
 	}, [lng]);
 
+	return { activeLng, lng };
 };
 
 export const I18nProvider = ({ children }: { children: React.ReactNode }): React.ReactNode => {

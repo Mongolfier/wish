@@ -2,6 +2,7 @@ import acceptLanguage from 'accept-language';
 import { NextRequest, NextResponse } from 'next/server';
 
 import {
+	cookieName,
 	normalizedFallbackLng as fallbackLng,
 	normalizedLanguages as languages,
 } from '@/core/shared/i18n/config';
@@ -13,12 +14,23 @@ export function localizationMiddleware(req: NextRequest) {
 		return NextResponse.next();
 	}
 
+	if (req.nextUrl.pathname.startsWith('/locales')) {
+		return NextResponse.next();
+	}
+
 	let lng: string | null = null;
 
 	const pathnameLng = req.nextUrl.pathname.split('/')[1].toLowerCase();
 
 	if (pathnameLng && languages.includes(pathnameLng)) {
 		lng = pathnameLng;
+	}
+
+	if (!lng && req.cookies.get(cookieName)?.value.toLowerCase()) {
+		const cookieLng = acceptLanguage.get(req.cookies.get(cookieName)?.value)?.toLowerCase();
+		if (cookieLng && languages.includes(cookieLng)) {
+			lng = cookieLng;
+		}
 	}
 
 
@@ -41,6 +53,7 @@ export function localizationMiddleware(req: NextRequest) {
 		const response = NextResponse.redirect(
 			new URL(`/${lng.toLowerCase()}${req.nextUrl.pathname}${req.nextUrl.search}`, req.url),
 		);
+		response.cookies.set(cookieName, lng);
 		return response;
 	}
 

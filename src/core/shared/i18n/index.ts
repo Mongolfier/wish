@@ -2,8 +2,9 @@ import { FallbackNs } from 'react-i18next';
 import { initReactI18next } from 'react-i18next/initReactI18next';
 import { createInstance, FlatNamespace, KeyPrefix, Namespace } from 'i18next';
 import Backend from 'i18next-chained-backend';
+import { cookies } from 'next/headers';
 
-import { getI18nConfig, normalizedFallbackLng as fallbackLng } from './config';
+import { cookieName, getI18nConfig, normalizedFallbackLng as fallbackLng } from './config';
 
 const initI18next = async (lng: string, ns: string | string[]) => {
 	// on server side we create a new instance for each render, because during compilation everything seems to be executed in parallel
@@ -21,7 +22,8 @@ export async function getServerTranslation<
 		FallbackNs<Ns extends FlatNamespace ? FlatNamespace : $FirstNamespace<FlatNamespace>>
 	> = undefined,
 >(ns?: Ns, options: { keyPrefix?: KPrefix } = {}) {
-	const lng = fallbackLng;
+	const cookieStore = await cookies();
+	const lng = cookieStore.get(cookieName)?.value ?? fallbackLng;
 
 	const i18nextInstance = await initI18next(lng, Array.isArray(ns) ? (ns as string[]) : (ns as string));
 

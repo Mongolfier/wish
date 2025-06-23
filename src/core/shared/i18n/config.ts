@@ -4,11 +4,11 @@ import resourcesToBackend from 'i18next-resources-to-backend';
 const fallbackLng = 'ru';
 export const normalizedFallbackLng = fallbackLng.toLowerCase();
 
-// Порядок важен
 const languages = [fallbackLng, 'en'];
 export const normalizedLanguages = languages.map((lang) => lang.toLowerCase());
 
-export const defaultNS = 'app';
+export const defaultNS = 'translations';
+export const cookieName = 'locale' as const;
 
 export function getI18nConfig(lng: string = fallbackLng, ns: string | string[] = defaultNS): InitOptions {
 	return {

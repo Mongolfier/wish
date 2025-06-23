@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-		"node": ">=18"
-	},
+    "node": ">=18"
+  },
   "contributors": [
-		"Dmitry Mumrenkov <dmitrymumrenkov@gmail.com>"
-	],
+    "Dmitry Mumrenkov <dmitrymumrenkov@gmail.com>"
+  ],
   "license": "MIT",
   "scripts": {
     "dev": "next dev --turbopack",
@@ -27,7 +27,8 @@
     "query-string": "^9.2.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-i18next": "^15.5.3"
+    "react-i18next": "^15.5.3",
+    "react-select": "^5.10.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",

@@ -1,8 +1,8 @@
-import { useMemo, useTransition } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { useMemo, useTransition, useEffect, useState } from 'react';
+import { usePathname, useRouter, useParams } from 'next/navigation';
 
 import { useTranslation } from '@/core/shared/i18n/client';
-import { normalizedLanguages } from '@/core/shared/i18n/config';
+import { normalizedLanguages, normalizedFallbackLng } from '@/core/shared/i18n/config';
 
 export type Language = {
 	title: string;
@@ -13,11 +13,21 @@ export type Language = {
 export const useLanguageSelect = () => {
 	const router = useRouter();
 	const pathname = usePathname();
+	const params = useParams();
 	const [isPending, startTransition] = useTransition();
 	const { t, i18n } = useTranslation('lang');
+	
+	const [isClient, setIsClient] = useState(false);
+
+	const currentLocale = params?.locale || normalizedFallbackLng;
+	const normalizedCurrentLocale = Array.isArray(currentLocale) ? currentLocale[0] : currentLocale;
+
+	useEffect(() => {
+		setIsClient(true);
+	}, []);
 
 	const changeLanguage = (locale: Language) => {
-		if (i18n.language === locale.code) {
+		if (normalizedCurrentLocale === locale.code) {
 			return;
 		}
 
@@ -29,25 +39,38 @@ export const useLanguageSelect = () => {
 	};
 
 	const languageList: Language[] = useMemo(() => {
+		if (!isClient) {
+			return [];
+		}
+		
 		return normalizedLanguages.map((language) => ({
 			title: t(`lang:${language}`),
 			abbr: t(`lang:abbrs.${language}`),
 			code: language,
 		}));
-	}, [t]);
+	}, [t, isClient]);
 
 	const currentLanguage: Language = useMemo(() => {
+		if (!isClient) {
+			return {
+				title: '',
+				abbr: '',
+				code: normalizedCurrentLocale,
+			};
+		}
+		
 		return {
-			title: t(`lang:${i18n.language}`),
-			abbr: t(`lang:abbrs.${i18n.language}`),
-			code: i18n.language,
+			title: t(`lang:${normalizedCurrentLocale}`),
+			abbr: t(`lang:abbrs.${normalizedCurrentLocale}`),
+			code: normalizedCurrentLocale,
 		};
-	}, [i18n.language, t]);
+	}, [normalizedCurrentLocale, t, isClient]);
 
 	return {
 		changeLanguage,
 		languageList,
 		currentLanguage,
 		isPending,
+		isClient,
 	};
 };

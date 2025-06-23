@@ -1,6 +1,6 @@
 import { dir } from 'i18next';
 import { RootBody } from '@/core/app/ui/RootBody';
-
+import { Header } from '@/core/features/Header/ui';
 
 import '../globals.css';
 
@@ -18,8 +18,10 @@ export default async function RootLayout({
             lang={locale}
             dir={dir(locale)}
         >
-            <head />
-            <RootBody>{children}</RootBody>
+            <RootBody>
+                <Header />
+                {children}
+            </RootBody>
         </html>
     );
 }
