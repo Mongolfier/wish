@@ -21,7 +21,7 @@ export function getI18nConfig(lng: string = fallbackLng, ns: string | string[] =
 		ns,
 		backend: {
 			backends: [
-				resourcesToBackend((lng: string, ns: string) => fetch(`/locales/${lng}/${ns}.json`).then(res => res.json()))
+				resourcesToBackend((lng: string, ns: string) => import(`../../../../public/locales/${lng}/${ns}.json`))
 			],
 		},
 	};
