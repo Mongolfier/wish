@@ -6,6 +6,7 @@ import { routes } from '@/core/shared/router';
 import { getServerTranslation } from '@/core/shared/i18n';
 
 import css from './index.module.css';
+import { Auth } from '../../Auth/Auth';
 
 export const Header = async () => {
     const { t } = await getServerTranslation('header');
@@ -19,7 +20,7 @@ export const Header = async () => {
                 <div className={css.buttonsWrapper}>
                     <LanguageSelector />
                     <button className={css.button}>{t('header:aboutService')}</button>
-                    <button className={css.button}>{t('header:login')}</button>
+                    <Auth />
                 </div>
             </div>
         </header>

@@ -1,0 +1,7 @@
+.DialogDescription {
+	margin: 10px 0 0;
+	font-size: var(--bui-typo-text-small);
+	font-style: normal;
+	font-weight: 400;
+	color: var(--bui-mono600-white);
+}

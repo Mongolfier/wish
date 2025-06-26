@@ -1,0 +1,6 @@
+.DialogButtonsWrapper {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+	margin-top: 20px;
+}
