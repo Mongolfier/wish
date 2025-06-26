@@ -10,14 +10,6 @@ import {
 acceptLanguage.languages(languages);
 
 export function localizationMiddleware(req: NextRequest) {
-	if (req.nextUrl.pathname.indexOf('icon') > -1 || req.nextUrl.pathname.indexOf('chrome') > -1) {
-		return NextResponse.next();
-	}
-
-	if (req.nextUrl.pathname.startsWith('/locales')) {
-		return NextResponse.next();
-	}
-
 	let lng: string | null = null;
 
 	const pathnameLng = req.nextUrl.pathname.split('/')[1].toLowerCase();
@@ -33,7 +25,6 @@ export function localizationMiddleware(req: NextRequest) {
 		}
 	}
 
-
 	if (!lng) {
 		const browserLng = acceptLanguage.get(req.headers.get('Accept-Language'))?.toLowerCase();
 
@@ -44,6 +35,14 @@ export function localizationMiddleware(req: NextRequest) {
 
 	if (!lng) {
 		lng = fallbackLng;
+	}
+
+	if (lng && req.cookies.get(cookieName)?.value.toLowerCase() && lng !== req.cookies.get(cookieName)?.value.toLowerCase()) {
+		// const response = NextResponse.redirect(
+		// 	new URL(`${req.nextUrl.pathname}${req.nextUrl.search}`, req.url),
+		// );
+		req.cookies.set(cookieName, lng);
+		// return response;
 	}
 
 	if (
