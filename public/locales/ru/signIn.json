@@ -1,0 +1,9 @@
+{
+    "title": "Вход в аккаунт",
+    "email": "E-mail",
+    "password": "Пароль",
+    "signIn": "Войти",
+    "newUser": "Новый пользователь?",
+    "signUp": "Зарегистрироваться",
+    "goToSignUp": "Нет аккаунта? <SignUpLink>Зарегистрироваться<SignUpLink />"
+}

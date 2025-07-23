@@ -1,21 +1,21 @@
 .DialogClose {
-	position: absolute;
-	top: 0;
-	right: 0;
-	z-index: 1001;
-	width: 64px;
-	height: 64px;
-	background: var(--bui-mono50-white);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1001;
+    width: 64px;
+    height: 64px;
+    background: var(--bui-mono50-white);
 
-	&:hover {
-		.icon {
-			opacity: 1;
-		}
-	}
+    &:hover {
+        .icon {
+            opacity: 1;
+        }
+    }
 }
 
 .icon {
-	width: 25px;
-	height: 25px;
-	opacity: 0.5;
+    width: 25px;
+    height: 25px;
+    opacity: 0.5;
 }

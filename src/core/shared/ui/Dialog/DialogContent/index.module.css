@@ -1,23 +1,23 @@
 .overlay {
-	z-index: 1000;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	max-width: 100%;
-	overflow: auto;
-	background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .content {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
-	padding: 64px 0;
-	overflow: auto;
-	text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 64px 0;
+    overflow: auto;
+    text-align: center;
 
-	&:focus-visible {
-		outline: none;
-	}
+    &:focus-visible {
+        outline: none;
+    }
 }

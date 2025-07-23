@@ -1,8 +1,3 @@
 export const RootBody = ({ children }: React.PropsWithChildren) => {
-
-    return (
-        <body>
-            {children}
-        </body>
-    )
-}
+    return <body>{children}</body>;
+};

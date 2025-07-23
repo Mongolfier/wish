@@ -1,0 +1,13 @@
+{
+    "singleQuote": true,
+    "printWidth": 120,
+    "tabWidth": 2,
+    "semi": true,
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "endOfLine": "auto",
+    "trailingComma": "all",
+    "useTabs": true,
+    "singleAttributePerLine": true,
+    "parser": "babel-ts"
+}

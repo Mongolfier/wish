@@ -17,14 +17,13 @@ export const AuthDialog = ({ open, onOpenChange }: AuthDialogProps) => {
                 <DialogHeading>
                     <div style={{ backgroundColor: 'red' }}>
                         <form>
-                            <input type="text" placeholder="Email" />
-                            <input type="password" placeholder="Password" />
-                            <button type="submit">Login</button>
+                            <input type='text' placeholder='Email' />
+                            <input type='password' placeholder='Password' />
+                            <button type='submit'>Login</button>
                         </form>
                     </div>
                 </DialogHeading>
             </DialogContent>
-        </Dialog >
-
+        </Dialog>
     );
 };
