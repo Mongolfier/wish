@@ -1,5 +1,5 @@
-import { authRoutes } from "./auth";
+import { authRoutes } from './auth';
 
 export const apiRoutes = {
-	auth: authRoutes,
+    auth: authRoutes,
 } as const;

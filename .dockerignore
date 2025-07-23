@@ -1,6 +1,14 @@
-node_modules
 .next
 .git
 .gitignore
 Dockerfile
 .dockerignore
+**/node_modules
+**/dist
+**/build
+**/out
+**/public
+**/src
+**/test
+**/test-results
+**/test-results-*/

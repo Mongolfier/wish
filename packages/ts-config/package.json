@@ -1,0 +1,9 @@
+{
+    "name": "ts-config",
+    "version": "1.0.0",
+    "license": "MIT",
+    "type": "module",
+    "files": [
+        "tsconfig.json"
+    ]
+}
