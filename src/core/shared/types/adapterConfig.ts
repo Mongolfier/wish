@@ -1,0 +1,1 @@
+export type AdapterConfig = Pick<RequestInit, 'signal'>;
