@@ -1,7 +1,5 @@
-import { redirect } from 'next/navigation';
-
-import { routes } from '@/core/shared/router';
+import { Auth } from '@/core/pages/Auth/Auth';
 
 export default function AuthPage() {
-    redirect(routes.auth.signIn);
+	return <Auth />;
 }

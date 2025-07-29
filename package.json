@@ -1,7 +1,7 @@
 {
     "name": "wish",
     "version": "0.1.0",
-    "private": true,
+    "private": false,
     "engines": {
         "node": ">=18"
     },
@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "@floating-ui/react": "^0.27.12",
+        "@hookform/resolvers": "^5.2.1",
         "accept-language": "^3.0.20",
         "classnames": "^2.5.1",
         "i18next": "^25.2.1",
