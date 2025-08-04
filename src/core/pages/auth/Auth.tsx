@@ -1,7 +1,13 @@
 'use client';
 
-import css from "./Auth.module.css";
+import { AuthFlowBlock } from '@/core/widgets/AuthFlow';
+
+import css from './Auth.module.css';
 
 export const Auth = () => {
-  return <div>Auth</div>;
+  return (
+    <main>
+      <AuthFlowBlock />
+    </main>
+  );
 };
