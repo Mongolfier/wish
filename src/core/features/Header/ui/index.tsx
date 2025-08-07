@@ -22,7 +22,7 @@ export const Header = async () => {
                     <button className={css.button}>
                         {t('header:aboutService')}
                     </button>
-                    <Link href={routes.auth.signIn}>{t('header:login')}</Link>
+                    <Link href={routes.auth.index}>{t('header:login')}</Link>
                 </div>
             </div>
         </header>

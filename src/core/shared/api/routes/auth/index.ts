@@ -2,5 +2,5 @@ export const authRoutes = {
     login: () => '/auth/login',
     register: () => '/auth/register',
     refresh: () => '/auth/refresh',
-    flowDetermination: (email: string) => `auth/check-user/${email}`,
+    flowDetermination: () => `auth/check-auth`,
 } as const;
