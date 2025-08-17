@@ -39,8 +39,7 @@ export const useAuthFlow = ({ onSuccess }: UseAuthFlowProps) => {
   );
 
   const handleStepFinishSignUpComplete = useCallback(
-    // FIXME: add type
-    async (result: unknown) => {
+    async (result: { code: StepFinishSignUpResult }) => {
       if (result.code === StepFinishSignUpResult.Success) {
         onSuccess();
       }

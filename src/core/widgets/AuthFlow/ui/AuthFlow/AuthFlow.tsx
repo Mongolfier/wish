@@ -7,7 +7,7 @@ import { AuthFlowStep } from "../../model/constants/flowSteps";
 import { useAuthFlow } from "./useAuthFlow";
 import { StepEnterEmail } from "../steps/StepEnterEmail/StepEnterEmail";
 
-import css from "./AuthFlow.module.css";
+// import css from "./AuthFlow.module.css";
 
 interface AuthFlowProps {
   onStepChange?: (step: AuthFlowStep) => void;
@@ -23,11 +23,11 @@ export const AuthFlow = ({ onStepChange }: AuthFlowProps) => {
   const {
     currentStep,
     email,
-    handleResetToEnterEmailStep,
+    // handleResetToEnterEmailStep,
     handleSetCurrentEmail,
     handleStepEnterEmailComplete,
-    handleStepFinishSignUpComplete,
-    showBackButton,
+    // handleStepFinishSignUpComplete,
+    // showBackButton,
   } = useAuthFlow({ onSuccess: onAuthSuccess });
 
   useEffect(() => {
