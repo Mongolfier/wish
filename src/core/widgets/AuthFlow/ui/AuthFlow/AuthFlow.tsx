@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo } from "react";
 import { AuthFlowStep } from "../../model/constants/flowSteps";
 import { useAuthFlow } from "./useAuthFlow";
+import { AuthCard } from "../steps/AuthCard/AuthCard";
 import { StepEnterEmail } from "../steps/StepEnterEmail/StepEnterEmail";
 
 // import css from "./AuthFlow.module.css";
@@ -23,11 +24,8 @@ export const AuthFlow = ({ onStepChange }: AuthFlowProps) => {
   const {
     currentStep,
     email,
-    // handleResetToEnterEmailStep,
     handleSetCurrentEmail,
     handleStepEnterEmailComplete,
-    // handleStepFinishSignUpComplete,
-    // showBackButton,
   } = useAuthFlow({ onSuccess: onAuthSuccess });
 
   useEffect(() => {
@@ -36,6 +34,10 @@ export const AuthFlow = ({ onStepChange }: AuthFlowProps) => {
 
   const authStep = useMemo(() => {
     switch (currentStep) {
+      case AuthFlowStep.AuthType:
+        return (
+          <AuthCard onSuccess={onAuthSuccess} />
+        );
       case AuthFlowStep.EnterEmail:
         return (
           <StepEnterEmail
@@ -45,9 +47,11 @@ export const AuthFlow = ({ onStepChange }: AuthFlowProps) => {
           />
         );
       default:
-        return null;
+        return (
+          <AuthCard onSuccess={onAuthSuccess} />
+        );
     }
-  }, []);
+  }, [currentStep, email, handleSetCurrentEmail, handleStepEnterEmailComplete, onAuthSuccess]);
 
   return <div>{authStep}</div>;
 };

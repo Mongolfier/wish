@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import { useEmailInput } from "@/core/shared/hooks/useEmailInput";
 import { useTranslation } from "@/core/shared/i18n/client";
 import { StepEnterEmailResult } from "../../../model/constants/stepsResults";
-import { useAuthFlowDetermination } from "../../../hooks/useAuthFlowDetermination";
 import { Support } from "../../components/Support/Support";
 
 export interface StepEnterEmailProps {
@@ -48,17 +47,11 @@ export const StepEnterEmail = ({
     },
   });
 
-  const {
-    determineFlow,
-    isLoading,
-    hasError: hasDeterminationError,
-    errorMessage: determinationErrorMessage,
-  } = useAuthFlowDetermination(onComplete);
-
   const onSubmit = (data: FormData) => {
-    if (isLoading) return;
     onEmailChange(data.email);
-    determineFlow(data.email);
+    // For now, we'll assume it's a sign-in flow
+    // In the future, this could be replaced with actual API call
+    onComplete(StepEnterEmailResult.SignIn);
   };
 
   return (
@@ -75,12 +68,8 @@ export const StepEnterEmail = ({
 
         {errors.email && <span className="error">{errors.email.message}</span>}
 
-        {hasDeterminationError && (
-          <span className="error">{determinationErrorMessage}</span>
-        )}
-
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? t("loading") : t("continue")}
+        <button type="submit">
+          {t("continue")}
         </button>
 
         <Support />
