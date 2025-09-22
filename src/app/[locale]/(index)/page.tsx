@@ -1,5 +1,5 @@
 import { MainPage } from '@/core/pages';
-import { getServerTranslation } from '@/core/shared/i18n';
+import { getServerTranslation } from '@/core/shared/i18n/server';
 
 export async function generateMetadata() {
     const { t } = await getServerTranslation('meta');
