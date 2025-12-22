@@ -1,9 +1,11 @@
 'use client';
 
-export default function GlobalError({
-    error,
-    reset,
-}: Readonly<{ error: Error & { digest?: string }; reset: () => void }>) {
+import { useTranslation } from '@/core/shared/i18n/client';
+
+export default function GlobalError() {
+    const { t } = useTranslation('meta');
+	const metadata = getGlobalErrorMetadata(t);
+    
     return (
         <html>
             <body>

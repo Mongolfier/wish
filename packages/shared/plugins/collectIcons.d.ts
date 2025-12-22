@@ -1,0 +1,1 @@
+export function collectIcons(iconsDirectory: string): Array<{ folder: string, icons: string[] }>;
