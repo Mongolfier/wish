@@ -11,13 +11,13 @@ interface UseAuthFlowProps {
 }
 export const useAuthFlow = ({ onSuccess }: UseAuthFlowProps) => {
   const [currentStep, setCurrentStep] = useState<AuthFlowStep>(
-    AuthFlowStep.EnterEmail
+    AuthFlowStep.AuthType
   );
 
   const [email, setEmail] = useState<string>("");
 
-  const handleResetToEnterEmailStep = useCallback(() => {
-    setCurrentStep(AuthFlowStep.EnterEmail);
+  const handleResetToAuthTypeStep = useCallback(() => {
+    setCurrentStep(AuthFlowStep.AuthType);
   }, []);
 
   const handleSetCurrentEmail = useCallback((email: string) => {
@@ -50,7 +50,7 @@ export const useAuthFlow = ({ onSuccess }: UseAuthFlowProps) => {
   return {
     currentStep,
     email,
-    handleResetToEnterEmailStep,
+    handleResetToAuthTypeStep,
     handleSetCurrentEmail,
     handleStepEnterEmailComplete,
     handleStepFinishSignUpComplete,

@@ -1,3 +1,4 @@
+import { TestComponent } from '@/core/features/Test/test';
 import { MainPage } from '@/core/pages';
 import { getServerTranslation } from '@/core/shared/i18n/server';
 
@@ -14,6 +15,7 @@ export default async function IndexPage() {
     return (
         <main>
             <MainPage />
+            <TestComponent />
         </main>
     );
 }

@@ -6,6 +6,7 @@ import { Header } from '@/core/features/Header/ui';
 import { I18nProvider } from '@/core/shared/i18n/client';
 
 import '../globals.css';
+import { ReduxProvider } from '@/core/app/providers/ReduxProvider/ReduxProvider';
 
 export default async function RootLayout({
     children,
@@ -19,12 +20,14 @@ export default async function RootLayout({
     return (
         <html lang={locale} dir={dir(locale)}>
             <ClientCookiesProvider>
-                <I18nProvider>
-                    <RootBody>
-                        <Header />
-                        {children}
-                    </RootBody>
-                </I18nProvider>
+                <ReduxProvider>
+                    <I18nProvider>
+                        <RootBody>
+                            <Header />
+                            {children}
+                        </RootBody>
+                    </I18nProvider>
+                </ReduxProvider>
             </ClientCookiesProvider>
         </html>
     );

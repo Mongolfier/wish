@@ -23,6 +23,7 @@
     "dependencies": {
         "@floating-ui/react": "^0.27.12",
         "@hookform/resolvers": "^5.2.1",
+        "@reduxjs/toolkit": "^2.8.2",
         "accept-language": "^3.0.20",
         "classnames": "^2.5.1",
         "i18next": "^25.2.1",
@@ -37,6 +38,7 @@
         "react-dom": "^19.1.1",
         "react-hook-form": "^7.61.1",
         "react-i18next": "^15.5.3",
+        "react-redux": "^9.2.0",
         "react-select": "^5.10.1",
         "zod": "^3.25.67"
     },

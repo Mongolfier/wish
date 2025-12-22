@@ -1,7 +1,10 @@
 export enum AuthFlowStep {
-	EnterEmail = 'enterEmail',
-	EnterSignInPassword = 'enterSignInPassword',
-	EnterSignUpPassword = 'enterSignUpPassword',
-	HaveAccount = 'haveAccount',
-	FinishSignUp = 'finishSignUp',
+  AuthType = "authType",
+  Login = "login",
+  Register = "register",
+  EnterEmail = "enterEmail",
+  EnterSignInPassword = "enterSignInPassword",
+  EnterSignUpPassword = "enterSignUpPassword",
+  HaveAccount = "haveAccount",
+  FinishSignUp = "finishSignUp",
 }
