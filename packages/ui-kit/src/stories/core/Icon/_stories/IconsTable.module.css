@@ -1,0 +1,29 @@
+.wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 40px;
+	align-items: flex-start;
+}
+
+.tableCell {
+	& svg {
+		color: #fff;
+	}
+}
+
+.cell {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+}
+
+.tableHeadCell {
+	text-align: left;
+	color: #fff;
+}
+
+.tableCell,
+.caption {
+	color: #fff;
+}

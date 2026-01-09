@@ -1,0 +1,13 @@
+:root {
+	/* - Z-indexes - */
+	--z-index-dropdown: 1000;
+	--z-index-sticky: 1020;
+	--z-index-fixed: 1030;
+	--z-index-scrollbar: 1035;
+	--z-index-modal-overlay: 1040;
+	--z-index-offcanvas: 1050;
+	--z-index-modal: 1060;
+	--z-index-popover: 1070;
+	--z-index-tooltip: 1080;
+	--z-index-launcher_toolbar: 10000;
+}

@@ -1,6 +1,6 @@
 import { forwardRef, type FC, type RefAttributes, type SVGProps } from "react";
 import cn from "classnames";
-import { Icon } from "@/core/Icon";
+import { Icon } from "../../core/Icon";
 
 import css from "./Loader.module.css";
 
