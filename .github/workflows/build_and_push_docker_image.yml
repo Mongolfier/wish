@@ -5,11 +5,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build_and_push_image:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
 
@@ -24,6 +21,7 @@ jobs:
 
     - name: Build and push Docker image
       run: |
+        trap "docker logout ${{ secrets.REGISTRY }}:5000 || true" EXIT
         VERSION=$(date +%s)
         docker build . --file Dockerfile --tag ${{ secrets.REGISTRY }}:5000/wish-react-app:$VERSION
         docker tag ${{ secrets.REGISTRY }}:5000/wish-react-app:$VERSION ${{ secrets.REGISTRY }}:5000/wish-react-app:latest
@@ -32,11 +30,8 @@ jobs:
         docker logout ${{ secrets.REGISTRY }}:5000
 
   deploy_to_server:
-
     needs: build_and_push_image
-
     runs-on: ubuntu-latest
-
     steps:
       - name: Pull and run latest wish app image
         uses: appleboy/ssh-action@v1
