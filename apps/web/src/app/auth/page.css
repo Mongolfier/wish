@@ -1,0 +1,53 @@
+.authPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 360px;
+}
+
+.authForm h1 {
+  margin-bottom: 0.5rem;
+}
+
+.authField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: left;
+}
+
+.authField span {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.authField input {
+  padding: 0.6em 0.8em;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #1a1a1a;
+  color: inherit;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.25s;
+}
+
+.authField input:focus {
+  border-color: #646cff;
+}
+
+@media (prefers-color-scheme: light) {
+  .authField input {
+    background: #fff;
+    border-color: #ccc;
+  }
+}
