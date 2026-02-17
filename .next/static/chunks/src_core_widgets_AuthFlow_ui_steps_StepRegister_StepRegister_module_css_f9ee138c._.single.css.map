@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/core/widgets/AuthFlow/ui/steps/StepRegister/StepRegister.module.css"],"sourcesContent":[".error {\r\n  color: #d32f2f;\r\n  font-size: 14px;\r\n  margin-top: 4px;\r\n  display: block;\r\n}\r\n\r\n/* input {\r\n  width: 100%;\r\n  padding: 12px;\r\n  border: 1px solid #ccc;\r\n  border-radius: 4px;\r\n  font-size: 16px;\r\n  margin-bottom: 8px;\r\n}\r\n\r\nbutton {\r\n  width: 100%;\r\n  padding: 12px 24px;\r\n  background-color: #1976d2;\r\n  color: white;\r\n  border: none;\r\n  border-radius: 4px;\r\n  font-size: 16px;\r\n  cursor: pointer;\r\n  transition: background-color 0.2s;\r\n}\r\n\r\nbutton:hover:not(:disabled) {\r\n  background-color: #1565c0;\r\n}\r\n\r\nbutton:disabled {\r\n  background-color: #ccc;\r\n  cursor: not-allowed;\r\n}\r\n\r\nlabel {\r\n  display: block;\r\n  margin-bottom: 4px;\r\n  font-weight: 500;\r\n} */\r\n"],"names":[],"mappings":"AAAA"}}]
+}

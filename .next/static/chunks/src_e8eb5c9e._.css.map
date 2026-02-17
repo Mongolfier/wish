@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///C:/projects/wish/src/core/shared/ui/Logo/Logo.module.css"],"sourcesContent":[".logoWrapper {\n    position: relative;\n    width: 134px;\n    height: 44px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.ellipse {\n    position: absolute;\n    top: -10%;\n    left: -10%;\n    width: 120%;\n    height: 120%;\n    border-radius: 50%;\n    background: linear-gradient(\n        #6a64f6 0%,\n        #a96ddf 0%,\n        #c77fcd 66%,\n        #a789c9 100%\n    );\n    filter: blur(15px);\n}\n\n.logo {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;;AASA;;;;;;;;;;;AAgBA","debugId":null}},
+    {"offset": {"line": 31, "column": 0}, "map": {"version":3,"sources":["file:///C:/projects/wish/src/core/features/Header/ui/index.module.css"],"sourcesContent":[".header {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n}\n\n.headerWrapper {\n    width: 100%;\n    max-width: 1320px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    min-height: 100px;\n}\n\n.buttonsWrapper {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 35px;\n}\n"],"names":[],"mappings":"AAAA;;;;;;AAMA;;;;;;;;;AASA","debugId":null}},
+    {"offset": {"line": 55, "column": 0}, "map": {"version":3,"sources":["file:///C:/projects/wish/src/app/globals.css"],"sourcesContent":["body {\n    margin: 0;\n    box-sizing: border-box;\n    min-width: 100vw;\n    min-height: 100vh;\n    position: relative;\n}\n"],"names":[],"mappings":"AAAA","debugId":null}}]
+}

@@ -1,0 +1,1 @@
+"use strict";exports.id=168,exports.ids=[168],exports.modules={6168:s=>{s.exports=JSON.parse('{"title":"Вход в аккаунт","email":"E-mail","password":"Пароль","signIn":"Войти","newUser":"Новый пользователь?","signUp":"Зарегистрироваться","goToSignUp":"Нет аккаунта? <SignUpLink>Зарегистрироваться<SignUpLink />"}')}};

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[138],{8138:e=>{e.exports=JSON.parse('{"aboutService":"О сервисе","login":"Войти"}')}}]);

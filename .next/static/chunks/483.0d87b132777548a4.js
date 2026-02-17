@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[483],{1483:n=>{n.exports=JSON.parse('{"title":"Sign in to your account","email":"E-mail","password":"Password","signIn":"Sign in","newUser":"New user?","signUp":"Sign up","goToSignUp":"No account? <SignUpLink>Sign up<SignUpLink />"}')}}]);

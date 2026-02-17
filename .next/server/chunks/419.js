@@ -1,0 +1,1 @@
+"use strict";exports.id=419,exports.ids=[419],exports.modules={1419:e=>{e.exports=JSON.parse('{"aboutService":"О сервисе","login":"Войти"}')}};

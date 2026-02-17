@@ -1,0 +1,1 @@
+"use strict";exports.id=202,exports.ids=[202],exports.modules={5202:i=>{i.exports=JSON.parse('{"title":"Sign in to your account","email":"E-mail","password":"Password","signIn":"Sign in","newUser":"New user?","signUp":"Sign up","goToSignUp":"No account? <SignUpLink>Sign up<SignUpLink />"}')}};

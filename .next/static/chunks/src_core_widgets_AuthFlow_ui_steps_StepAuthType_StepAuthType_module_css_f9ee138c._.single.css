@@ -1,0 +1,23 @@
+/* [project]/src/core/widgets/AuthFlow/ui/steps/StepAuthType/StepAuthType.module.css [app-client] (css) */
+.StepAuthType-module__2dRFDW__auth-type-button {
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  margin: 8px 0;
+  padding: 12px 24px;
+  font-size: 16px;
+  transition: background-color .2s;
+  display: block;
+}
+
+.StepAuthType-module__2dRFDW__auth-type-button:hover {
+  background-color: #f5f5f5;
+}
+
+.StepAuthType-module__2dRFDW__auth-type-button:active {
+  background-color: #e0e0e0;
+}
+
+/*# sourceMappingURL=src_core_widgets_AuthFlow_ui_steps_StepAuthType_StepAuthType_module_css_f9ee138c._.single.css.map*/

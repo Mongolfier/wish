@@ -1,0 +1,22 @@
+services:
+  wish-app:
+    image: registry.wish.ru:5000/wish-react-app:latest
+    container_name: wish-app
+    ports:
+      - "3000:80"
+      - "443:443"
+    volumes:
+      # Монтирование SSL-сертификатов с хостинга
+      # Укажите правильный путь к сертификатам на вашем хостинге
+      - /path/to/ssl/cert.pem:/etc/nginx/ssl/cert.pem:ro
+      - /path/to/ssl/key.pem:/etc/nginx/ssl/key.pem:ro
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - wish-network
+
+networks:
+  wish-network:
+    driver: bridge
+
