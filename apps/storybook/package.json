@@ -1,0 +1,20 @@
+{
+  "name": "@wish/storybook",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build": "storybook build"
+  },
+  "dependencies": {
+    "@wish/ui-kit": "workspace:*",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@storybook/react-vite": "^10.2.9",
+    "storybook": "^10.2.9",
+    "vite": "^7.3.1"
+  }
+}
