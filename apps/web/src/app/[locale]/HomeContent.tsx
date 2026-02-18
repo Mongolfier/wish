@@ -2,11 +2,13 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import { Button } from '@wish/ui-kit'
 import './page.css'
 
-export default function HomePage() {
+export function HomeContent() {
   const [count, setCount] = useState(0)
+  const t = useTranslations('home')
 
   return (
     <>
@@ -18,17 +20,17 @@ export default function HomePage() {
           <Image src="/react.svg" className="logo logoReact" alt="React logo" width={96} height={96} />
         </a>
       </div>
-      <h1>Next.js + React</h1>
+      <h1>{t('title')}</h1>
       <div className="card">
         <Button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+          {t('count', { count })}
         </Button>
         <p>
-          Edit <code>src/app/page.tsx</code> and save to test HMR
+          {t('editHint', { file: 'src/app/page.tsx' })}
         </p>
       </div>
       <p className="readTheDocs">
-        Click on the Next.js and React logos to learn more
+        {t('readDocs')}
       </p>
     </>
   )

@@ -1,12 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
+import { useRouter } from '@/i18n/navigation'
 import { Button } from '@wish/ui-kit'
-import './page.css'
 
-export default function AuthPage() {
+export function AuthForm() {
   const router = useRouter()
+  const t = useTranslations('auth')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -20,10 +21,10 @@ export default function AuthPage() {
   return (
     <div className="authPage">
       <form className="authForm" onSubmit={handleSubmit}>
-        <h1>Авторизация</h1>
+        <h1>{t('title')}</h1>
 
         <label className="authField">
-          <span>Email</span>
+          <span>{t('email')}</span>
           <input
             type="email"
             value={email}
@@ -34,7 +35,7 @@ export default function AuthPage() {
         </label>
 
         <label className="authField">
-          <span>Пароль</span>
+          <span>{t('password')}</span>
           <input
             type="password"
             value={password}
@@ -44,7 +45,7 @@ export default function AuthPage() {
           />
         </label>
 
-        <Button type="submit">Войти</Button>
+        <Button type="submit">{t('submit')}</Button>
       </form>
     </div>
   )
