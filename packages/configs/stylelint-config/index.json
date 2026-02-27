@@ -1,0 +1,32 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recess-order",
+    "stylelint-config-html",
+    "stylelint-config-css-modules"
+  ],
+  "plugins": [
+    "stylelint-order"
+  ],
+  "rules": {
+    "color-function-notation": [
+      "modern",
+      {
+        "ignore": [
+          "with-var-inside"
+        ]
+      }
+    ],
+    "function-no-unknown": null,
+    "value-keyword-case": [
+      "lower",
+      {
+        "camelCaseSvgKeywords": true
+      }
+    ],
+    "no-descending-specificity": null,
+    "custom-property-pattern": null,
+    "selector-class-pattern": null,
+    "at-rule-no-unknown": null
+  }
+}

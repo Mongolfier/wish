@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:css": "stylelint \"src/**/*.{css,scss}\""
   },
   "dependencies": {
     "@wish/ui-kit": "workspace:*",
@@ -25,6 +26,9 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "globals": "^16.5.0",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.48.0"
+    "typescript-eslint": "^8.48.0",
+    "stylelint": "^16.11.0",
+    "stylelint-config": "workspace:*",
+    "eslint-config": "workspace:*"
   }
 }
