@@ -19,7 +19,7 @@ export default [
 		},
 		rules: {
 			...typescriptRules,
-			'@typescript-eslint/no-empty-object-type': 'warn',
+			'@typescript-eslint/no-empty-object-type': ['warn', { allowInterfaces: 'with-single-extends' }],
 		},
 	},
 ];

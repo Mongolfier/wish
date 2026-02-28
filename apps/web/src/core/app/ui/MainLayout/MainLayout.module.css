@@ -1,0 +1,12 @@
+.header {
+	flex-grow: 0;
+	flex-shrink: 0;
+}
+
+.content {
+	flex-grow: 1;
+}
+
+.footer {
+	margin: 0 auto;
+}

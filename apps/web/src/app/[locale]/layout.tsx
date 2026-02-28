@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 
+import { RootBody } from '@/core/app/ui/RootBody/RootBody';
 import { routing } from '@/i18n/routing';
 
 import '../globals.css';
@@ -27,11 +28,11 @@ export default async function LocaleLayout({
 
 	return (
 		<html lang={locale}>
-			<body>
+			<RootBody>
 				<NextIntlClientProvider messages={{ nav: messages.nav, home: messages.home }}>
 					{children}
 				</NextIntlClientProvider>
-			</body>
+			</RootBody>
 		</html>
 	);
 }

@@ -3,14 +3,19 @@ import type { PropsWithChildren } from 'react';
 import { Footer } from '@/core/widgets/footer/Footer';
 import { Header } from '@/core/widgets/header/Header';
 
-export interface MainLayoutProps extends PropsWithChildren {}
+import css from './MainLayout.module.css';
+
+export interface MainLayoutProps extends PropsWithChildren {
+	hideHeader?: boolean;
+	hideFooter?: boolean;
+}
 
 export const MainLayout = (props: MainLayoutProps) => {
 	return (
 		<>
-			<Header />
-			{props.children}
-			<Footer />
+			{!props.hideHeader && <Header className={css.header} />}
+			<main className={css.content}>{props.children}</main>
+			{!props.hideFooter && <Footer className={css.footer} />}
 		</>
 	);
 };
