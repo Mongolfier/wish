@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[589],{2589:s=>{s.exports=JSON.parse('{"title":"Вход в аккаунт","email":"E-mail","password":"Пароль","signIn":"Войти","newUser":"Новый пользователь?","signUp":"Зарегистрироваться","goToSignUp":"Нет аккаунта? <SignUpLink>Зарегистрироваться<SignUpLink />"}')}}]);

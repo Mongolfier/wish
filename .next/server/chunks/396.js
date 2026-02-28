@@ -1,1 +1,0 @@
-"use strict";exports.id=396,exports.ids=[396],exports.modules={4396:s=>{s.exports=JSON.parse('{"ru":"Русский","en":"English","abbrs":{"ru":"Ру","en":"En"}}')}};

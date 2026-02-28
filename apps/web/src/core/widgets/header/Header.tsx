@@ -1,4 +1,4 @@
-import { LanguageSwitcher } from "@/components/LanguageSwitcher"
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 
 export const Header = () => {
 	return (
@@ -6,5 +6,5 @@ export const Header = () => {
 			<h1>Wish</h1>
 			<LanguageSwitcher />
 		</header>
-	)
-}
+	);
+};

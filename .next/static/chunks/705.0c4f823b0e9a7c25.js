@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[705],{9705:e=>{e.exports=JSON.parse('{"ru":"Русский","en":"English","abbrs":{"ru":"Ру","en":"En"}}')}}]);

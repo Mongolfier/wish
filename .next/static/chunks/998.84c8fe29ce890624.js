@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[998],{4998:e=>{e.exports=JSON.parse('{"main":{"title":"Главная страница","description":"Описание главной страницы"}}')}}]);

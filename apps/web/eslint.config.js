@@ -6,7 +6,7 @@ import tseslint from 'typescript-eslint';
 import js from '@eslint/js';
 
 export default [
-	globalIgnores(['dist', '.next']),
+	globalIgnores(['dist', '.next', 'next-env.d.ts']),
 	...eslintConfig,
 	js.configs.recommended,
 	...tseslint.configs.recommended,
@@ -19,6 +19,7 @@ export default [
 		},
 		rules: {
 			...typescriptRules,
+			'@typescript-eslint/no-empty-object-type': 'warn',
 		},
 	},
 ];

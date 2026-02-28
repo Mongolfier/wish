@@ -1,1 +1,0 @@
-"use strict";exports.id=287,exports.ids=[287],exports.modules={2287:s=>{s.exports=JSON.parse('{"main":{"title":"Главная страница","description":"Описание главной страницы"}}')}};

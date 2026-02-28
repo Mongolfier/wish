@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///C:/projects/wish/src/core/widgets/AuthFlow/ui/components/Support/Support.module.css"],"sourcesContent":[""],"names":[],"mappings":"","debugId":null}},
-    {"offset": {"line": 5, "column": 0}, "map": {"version":3,"sources":["file:///C:/projects/wish/src/core/widgets/AuthFlow/ui/AuthFlowBlock/AuthFlowBlock.module.css"],"sourcesContent":[""],"names":[],"mappings":"","debugId":null}}]
-}
