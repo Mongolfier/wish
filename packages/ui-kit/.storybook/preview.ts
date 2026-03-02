@@ -1,4 +1,5 @@
-import { themes } from 'storybook/theming'
+import { themes } from 'storybook/theming';
+import '../src/assets/fonts/Montserrat.css';
 
 export default {
   parameters: {
