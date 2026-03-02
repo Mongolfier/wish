@@ -7,8 +7,8 @@
     "dev": "pnpm --filter @wish/web dev",
     "build": "pnpm --filter @wish/web build",
     "lint": "pnpm -r lint",
-    "storybook": "pnpm --filter @wish/storybook dev",
-    "build:storybook": "pnpm --filter @wish/storybook build",
+    "storybook": "pnpm --filter @wish/ui-kit storybook",
+    "build:storybook": "pnpm --filter @wish/ui-kit build:storybook",
     "build:ui-kit": "pnpm --filter @wish/ui-kit build"
   },
   "pnpm": {
