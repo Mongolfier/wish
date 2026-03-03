@@ -10,7 +10,9 @@
       "types": "./src/index.ts",
       "default": "./src/index.ts"
     },
-    "./styles": "./src/styles/index.css"
+    "./styles": "./src/styles/index.css",
+    "./MontserratFont": "./src/assets/fonts/Montserrat.css",
+    "./JazzBallFont": "./src/assets/fonts/JazzBall.css"
   },
   "scripts": {
     "lint": "eslint src/",

@@ -1,0 +1,24 @@
+.logoWrapper {
+	position: relative;
+	display: inline-block;
+}
+
+.ellipse {
+	position: absolute;
+	top: -10%;
+	left: -15%;
+	width: 130%;
+	height: 120%;
+	border-radius: 50%;
+	background: linear-gradient(#6a64f6, #a96ddf 0, #c77fcd 66%, #a789c9);
+	filter: blur(15px);
+}
+
+.logo {
+	font-family: JazzBall, sans-serif;
+	font-size: 44px;
+	line-height: 1;
+	color: #fff;
+	z-index: 1;
+	position: relative;
+}

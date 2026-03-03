@@ -1,0 +1,15 @@
+@font-face {
+	font-family: JazzBall;
+	font-style: normal;
+	font-weight: 400;
+	src: url('./JazzBall/Jazz_Ball_Regular.ttf');
+	font-display: swap;
+}
+
+@font-face {
+	font-family: JazzBall;
+	font-style: normal;
+	font-weight: 700;
+	src: url('./JazzBall/Jazz_Ball_Bold.ttf');
+	font-display: swap;
+}

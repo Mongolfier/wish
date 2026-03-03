@@ -5,6 +5,9 @@ import { getMessages } from 'next-intl/server';
 import { RootBody } from '@/core/app/ui/RootBody/RootBody';
 import { routing } from '@/i18n/routing';
 
+import '@wish/ui-kit/MontserratFont';
+import '@wish/ui-kit/JazzBallFont';
+
 import '../globals.css';
 import './layout.css';
 
