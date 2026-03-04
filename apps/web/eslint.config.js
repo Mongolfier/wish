@@ -4,9 +4,13 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import js from '@eslint/js';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default [
-	globalIgnores(['dist', '.next', 'next-env.d.ts']),
+	globalIgnores(['dist', '.next', 'next-env.d.ts', 'eslint.config.js']),
 	...eslintConfig,
 	js.configs.recommended,
 	...tseslint.configs.recommended,
@@ -16,6 +20,10 @@ export default [
 		languageOptions: {
 			ecmaVersion: 2020,
 			globals: globals.browser,
+			parserOptions: {
+				project: true,
+				tsconfigRootDir: __dirname,
+			},
 		},
 		rules: {
 			...typescriptRules,

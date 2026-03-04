@@ -1,4 +1,4 @@
-import { type FC, type HTMLAttributes, type ReactNode, type RefAttributes, forwardRef } from 'react';
+import { type FC, forwardRef, type HTMLAttributes, type ReactNode, type RefAttributes } from 'react';
 import cn from 'classnames';
 
 import css from './Footer.module.css';

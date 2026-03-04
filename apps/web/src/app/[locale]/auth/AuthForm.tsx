@@ -12,7 +12,7 @@ export function AuthForm() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = (e: { preventDefault: () => void }) => {
 		e.preventDefault();
 		// TODO: implement actual auth logic
 		console.log('Login attempt:', { email, password });
