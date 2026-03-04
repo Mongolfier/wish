@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { MainMenu } from "./MainMenu";
+import type { Meta, StoryObj } from '@storybook/react';
+import { MainMenu } from './MainMenu';
 
 const meta = {
-	title: "Organisms/MainMenu",
+	title: 'Organisms/MainMenu',
 	component: MainMenu,
 	parameters: {
 		// layout: 'centered',
 	},
-	tags: ['autodocs',]
-} satisfies Meta<typeof MainMenu>
+	tags: ['autodocs'],
+} satisfies Meta<typeof MainMenu>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -20,6 +20,6 @@ export const Default: Story = {
 			<div style={{ background: 'var(--color-neutrals-900, #171c22)' }}>
 				<Story />
 			</div>
-		)
-	]
-}
+		),
+	],
+};
