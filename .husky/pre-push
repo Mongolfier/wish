@@ -1,0 +1,4 @@
+pnpm lint
+pnpm lint:css
+pnpm format
+pnpm test:run

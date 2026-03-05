@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
+
 import styles from './Button.module.css';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -7,7 +8,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	children: ReactNode;
 }
 
-export function Button({ variant = 'primary', size = 'md', children, className, ...props }: ButtonProps) {
+export function Button({ variant = 'primary', size = 'md', children, className, ...props }: Readonly<ButtonProps>) {
 	const classNames = [styles.button, styles[variant], styles[size], className].filter(Boolean).join(' ');
 
 	return (

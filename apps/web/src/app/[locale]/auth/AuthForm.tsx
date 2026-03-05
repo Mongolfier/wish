@@ -14,8 +14,7 @@ export function AuthForm() {
 
 	const handleSubmit = (e: { preventDefault: () => void }) => {
 		e.preventDefault();
-		// TODO: implement actual auth logic
-		console.log('Login attempt:', { email, password });
+		// Auth logic will use email/password when backend is ready
 		router.push('/');
 	};
 

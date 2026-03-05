@@ -1,8 +1,8 @@
-@import url("./reset.css");
+@import url('./reset.css');
 
 body {
-  display: flex;
-  min-width: 320px;
-  min-height: 100vh;
-  margin: 0;
+	display: flex;
+	min-width: 320px;
+	min-height: 100vh;
+	margin: 0;
 }
