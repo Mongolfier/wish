@@ -1,0 +1,21 @@
+@import url('./Footer.vars.css');
+
+.footer {
+	box-sizing: border-box;
+	width: 100%;
+	background-color: var(--footer-background, #000);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: var(--footer-padding_hor, 40px) var(--footer-padding_vert, 76px);
+}
+
+.mainWrapper {
+	box-sizing: border-box;
+	display: flex;
+	flex-grow: 1;
+	align-items: center;
+	justify-content: space-between;
+	max-width: var(--general-dimension_body-max_width_content, 1768px);
+	color: var(--colors-app-text-secondary, #fff);
+}

@@ -1,0 +1,208 @@
+@import url('../mixins/responsive.css');
+
+:root {
+	/* 1. COLORS */
+	--colors-accent-blue-10: #e3effc;
+	--colors-accent-blue-20: #c3ddfa;
+	--colors-accent-blue-30: #75b1f3;
+	--colors-accent-blue-40: #238cf5;
+	--colors-accent-blue-50: #197deb;
+	--colors-accent-blue-60: #1370d7;
+	--colors-accent-blue-70: #155cc6;
+	--colors-accent-blue-80: #0c4b90;
+	--colors-accent-blue-90: #062548;
+	--colors-accent-blue-100: #041930;
+	--colors-accent-violet-10: #eadcff;
+	--colors-accent-violet-20: #d5b8ff;
+	--colors-accent-violet-30: #c195ff;
+	--colors-accent-violet-40: #ac71ff;
+	--colors-accent-violet-50: #974dfe;
+	--colors-accent-violet-60: #832dff;
+	--colors-accent-violet-70: #700bff;
+	--colors-accent-violet-80: #5200c8;
+	--colors-accent-violet-90: #1f0545;
+	--colors-accent-green-10: #e4f5ea;
+	--colors-accent-violet-100: #15042e;
+	--colors-accent-green-20: #cbf1d9;
+	--colors-accent-green-30: #5ed98d;
+	--colors-accent-green-40: #25c763;
+	--colors-accent-green-50: #20ad56;
+	--colors-accent-green-60: #1d9c4d;
+	--colors-accent-green-70: #1a8a45;
+	--colors-accent-green-80: #136834;
+	--colors-accent-green-90: #0b331a;
+	--colors-accent-green-100: #062311;
+	--colors-accent-red-10: #ffebed;
+	--colors-accent-red-20: #ffc4ca;
+	--colors-accent-red-30: #ff9ca6;
+	--colors-accent-red-40: #ff6171;
+	--colors-accent-red-50: #ff3a4e;
+	--colors-accent-red-60: #cc071b;
+	--colors-accent-red-70: #990000;
+	--colors-accent-red-80: #660000;
+	--colors-accent-red-90: #4c0000;
+	--colors-accent-red-100: #190000;
+	--colors-accent-yellow-10: #fffbe6;
+	--colors-accent-yellow-20: #fff1b8;
+	--colors-accent-yellow-30: #ffe58f;
+	--colors-accent-yellow-40: #ffd666;
+	--colors-accent-yellow-50: #ffc53d;
+	--colors-accent-yellow-60: #faad14;
+	--colors-accent-yellow-70: #d48806;
+	--colors-accent-yellow-80: #ad6800;
+	--colors-accent-yellow-90: #3e2708;
+	--colors-accent-yellow-100: #231504;
+	--colors-neutral-white-0_trans: #ffffff00;
+	--colors-neutral-white-2_trans: #ffffff05;
+	--colors-neutral-white-5_trans: #ffffff0c;
+	--colors-neutral-white-8_trans: #ffffff14;
+	--colors-neutral-white-10_trans: #ffffff19;
+	--colors-neutral-white-16_trans: #ffffff28;
+	--colors-neutral-white-20_trans: #ffffff33;
+	--colors-neutral-white-30_trans: #ffffff4c;
+	--colors-neutral-white-50_trans: #ffffff7f;
+	--colors-neutral-white-60_trans: #ffffff99;
+	--colors-neutral-white-80_trans: #ffffffcc;
+	--colors-neutral-white-90_trans: #ffffffe5;
+	--colors-neutral-white-100: #ffffff;
+	--colors-neutral-gray-10: #f5f5f5;
+	--colors-neutral-gray-20: #f1f1f1;
+	--colors-neutral-gray-30: #e8e8e8;
+	--colors-neutral-gray-40: #c7d1d2;
+	--colors-neutral-gray-50: #b7b9bc;
+	--colors-neutral-gray-60: #878b8f;
+	--colors-neutral-gray-70: #575c62;
+	--colors-neutral-gray-75: #373b41;
+	--colors-neutral-gray-80: #2e363d;
+	--colors-neutral-gray-85: #1c232a;
+	--colors-neutral-gray-90: #151c23;
+	--colors-neutral-gray-100: #080c10;
+	--colors-neutral-dark-0_trans: #0b101600;
+	--colors-neutral-dark-5_trans: #0b10160c;
+	--colors-neutral-dark-10_trans: #0b101619;
+	--colors-neutral-dark-20_trans: #0b101633;
+	--colors-neutral-dark-30_trans: #0b10164c;
+	--colors-neutral-dark-40_trans: #0b101666;
+	--colors-neutral-dark-50_trans: #0b10167f;
+	--colors-neutral-dark-60_trans: #0b101699;
+	--colors-neutral-dark-70_trans: #0b1016b2;
+	--colors-neutral-dark-80_trans: #0b1016cc;
+	--colors-neutral-dark-90_trans: #0b1016e5;
+	--colors-neutral-dark-100: #0b1016;
+	--colors-grd-blue_violet-0_100: #197deb;
+	--colors-grd-blue_violet-100_100: #833fe7;
+	--colors-app-text-primary: var(--colors-neutral-dark-100);
+	--colors-app-text-secondary: var(--colors-neutral-white-100);
+
+	/* 2. DIMENSIONS */
+	--size-screen-xxs_min: 360px;
+	--size-screen-xxs_max: 575px;
+	--size-screen-xs_min: 576px;
+	--size-screen-xs_max: 767px;
+	--size-screen-s_min: 768px;
+	--size-screen-s_max: 1023px;
+	--size-screen-sm_min: 1024px;
+	--size-screen-sm_max: 1279px;
+	--size-screen-m_min: 1280px;
+	--size-screen-m_max: 1439px;
+	--size-screen-l_min: 1440px;
+	--size-screen-l_max: 1919px;
+	--size-screen-xl_min: 1920px;
+	--size-screen-xl_max: 2559px;
+	--size-screen-xxl_min: 2560px;
+	--size-base-xs-var_00: 0px;
+	--size-base-xs-var_01: 1px;
+	--size-base-xs-var_02: 2px;
+	--size-base-xs-var_03: 4px;
+	--size-base-s-var_01: 8px;
+	--size-base-s-var_02: 12px;
+	--size-base-s-var_03: 16px;
+	--size-base-m-var_01: 20px;
+	--size-base-m-var_02: 24px;
+	--size-base-m-var_03: 32px;
+	--size-base-l-var_01: 40px;
+	--size-base-l-var_02: 48px;
+	--size-base-l-var_03: 52px;
+	--size-base-l-var_04: 56px;
+	--size-base-xl-var_01: 72px;
+	--size-base-xl-var_02: 76px;
+	--size-base-xl-var_03: 96px;
+	--size-base-xl-var_04: 128px;
+	--space-xs-var_00: var(--size-base-xs-var_00);
+	--space-xs-var_01: var(--size-base-xs-var_01);
+	--space-xs-var_02: var(--size-base-xs-var_02);
+	--space-xs-var_03: var(--size-base-xs-var_03);
+	--space-s-var_01: var(--size-base-s-var_01);
+	--space-s-var_02: var(--size-base-s-var_02);
+	--space-s-var_03: var(--size-base-s-var_03);
+	--space-m-var_01: var(--size-base-m-var_01);
+	--space-m-var_02: var(--size-base-m-var_02);
+	--space-m-var_03: var(--size-base-m-var_03);
+	--space-l-var_01: var(--size-base-l-var_01);
+	--space-l-var_02: var(--size-base-l-var_02);
+	--space-l-var_03: var(--size-base-l-var_03);
+	--space-l-var_04: var(--size-base-l-var_04);
+
+	/* 3. TYPOGRAPHY */
+	--font-family-title: Montserrat, sans-serif;
+	--font-family-body: Montserrat, sans-serif;
+	--font-size-title-h1: 40px;
+	--font-size-title-h2: 28px;
+	--font-size-title-h3: 24px;
+	--font-size-title-h4: 20px;
+	--font-size-title-h5: 18px;
+	--font-size-title-h6: 16px;
+	--font-size-base-l: 19px;
+	--font-size-base-m: 16px;
+	--font-size-base-s: 14px;
+	--font-size-base-xs: 12px;
+	--font-size-base-xxs: 11px;
+	--font-line_height-xl: 48px;
+	--font-line_height-l: 36px;
+	--font-line_height-ml: 28px;
+	--font-line_height-m: 24px;
+	--font-line_height-sm: 20px;
+	--font-line_height-s: 16px;
+	--font-line_height-xs: 12px;
+	--font-letter_spacing-normal: 0;
+
+	/* SHARED */
+	--general-dimension_body-padding-vert: 76px;
+	--general-dimension_body-max_width_content: 1768px;
+
+	/* 4. EFFECTS */
+	--layer_blur-l: 20px;
+	--layer_blur-xl: 50px;
+	--layer_blur-xxl: 600px;
+	--bg_blur-xs: 8px;
+	--bg_blur-sm: 20px;
+	--bg_blur-m: 40px;
+	--bg_blur-ml: 50px;
+	--bg_blur-xl: 100px;
+}
+
+@mixin desktop-medium-screen {
+	:root {
+		--general-dimension_body-padding-vert: 24px;
+	}
+}
+
+@mixin laptop-screen {
+	:root {
+		--general-dimension_body-max_width_content: 1231px;
+	}
+}
+
+@mixin mobile-screen {
+	:root {
+		--font-size-title-h1: 30px;
+		--font-size-title-h2: 26px;
+		--font-size-title-h3: 22px;
+		--font-line_height-xl: 36px;
+		--font-line_height-l: 32px;
+		--font-letter_spacing-normal: 0px;
+
+		--general-dimension_body-max_width_content: 735px;
+		--general-dimension_body-padding-vert: 16px;
+	}
+}

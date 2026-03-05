@@ -6,8 +6,8 @@
 	"scripts": {
 		"dev": "pnpm --filter @wish/web dev",
 		"build": "pnpm --filter @wish/web build",
-		"lint": "pnpm -r lint --fix",
-		"lint:css": "pnpm --filter @wish/web run lint:css --fix",
+		"lint": "pnpm -r lint",
+		"lint:css": "pnpm --filter @wish/web run lint:css",
 		"format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
 		"storybook": "pnpm --filter @wish/ui-kit storybook",
 		"build:storybook": "pnpm --filter @wish/ui-kit build:storybook",

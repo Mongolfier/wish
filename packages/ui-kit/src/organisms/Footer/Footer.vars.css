@@ -1,0 +1,6 @@
+:root {
+	--footer-background: var(--colors-neutral-dark-100, #0b1016);
+	/* --footer-padding: 40px; */
+	--footer-padding_hor: var(--size-base-l-var_01);
+	--footer-padding_vert: var(--general-dimension_body-padding-vert);
+}

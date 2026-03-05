@@ -1,0 +1,7 @@
+@import url('../src/assets/styles/_variables.css');
+
+body,
+#storybook-root {
+	font-family: var(--font-family-body, Montserrat);
+	color: var(--colors-app-text-primary, #0b1016);
+}
