@@ -1,0 +1,41 @@
+import { Canvas, Meta, Controls } from '@storybook/addon-docs/blocks';
+
+import * as IconStories from './Icon.stories';
+
+<Meta of={IconStories} />
+
+# Icon
+
+Компонент `Icon` загружает SVG-иконки динамически по имени и категории.
+
+## Пример использования
+
+<Canvas of={IconStories.ExampleIcon} />
+
+## Props
+
+<Controls of={IconStories.ExampleIcon} />
+
+## Как это работает
+
+Иконки хранятся в `src/assets/icons/` и группируются по категориям (папкам).
+Компонент использует динамический `import()` для загрузки нужного SVG.
+
+```tsx
+<Icon
+	category="actions"
+	name="copy"
+	width={24}
+	height={24}
+/>
+```
+
+Если иконка не найдена, компонент выводит пустой `<svg>` и сообщение об ошибке в консоль.
+
+## Категории иконок
+
+| Категория  | Описание                |
+| ---------- | ----------------------- |
+| `actions`  | Действия (copy, add)    |
+| `entrance` | Иконки для входа (user) |
+| _(root)_   | Общие иконки (spinner)  |

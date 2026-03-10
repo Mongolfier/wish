@@ -12,7 +12,7 @@ export const WishLogo = () => {
 		>
 			<div className={css.logoWrapper}>
 				<span className={css.ellipse} />
-				<span className={css.logo}>Wish</span>
+				<span className={css.logo}>MyWish</span>
 			</div>
 		</Link>
 	);
