@@ -6,8 +6,8 @@
 .ellipse {
 	position: absolute;
 	top: -10%;
-	left: -15%;
-	width: 130%;
+	left: -10%;
+	width: 120%;
 	height: 120%;
 	background: linear-gradient(#6a64f6, #a96ddf 0, #c77fcd 66%, #a789c9);
 	filter: blur(15px);

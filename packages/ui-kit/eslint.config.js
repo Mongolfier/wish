@@ -10,7 +10,7 @@ import path from 'node:path';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default [
-	globalIgnores(['dist', 'node_modules', 'eslint.config.js']),
+	globalIgnores(['dist', 'node_modules', 'eslint.config.js', '**/*.mjs']),
 	...eslintConfig,
 	js.configs.recommended,
 	...tseslint.configs.recommended,
