@@ -6,9 +6,9 @@ import * as IconStories from './Icon.stories';
 
 # Icon
 
-Компонент `Icon` загружает SVG-иконки динамически по имени и категории.
+The `Icon` component loads SVG icons dynamically by name and category.
 
-## Пример использования
+## Usage example
 
 <Canvas of={IconStories.ExampleIcon} />
 
@@ -16,10 +16,10 @@ import * as IconStories from './Icon.stories';
 
 <Controls of={IconStories.ExampleIcon} />
 
-## Как это работает
+## How it works
 
-Иконки хранятся в `src/assets/icons/` и группируются по категориям (папкам).
-Компонент использует динамический `import()` для загрузки нужного SVG.
+Icons are stored in `src/assets/icons/` and grouped by category (folders).
+The component uses dynamic `import()` to load the required SVG.
 
 ```tsx
 <Icon
@@ -30,12 +30,20 @@ import * as IconStories from './Icon.stories';
 />
 ```
 
-Если иконка не найдена, компонент выводит пустой `<svg>` и сообщение об ошибке в консоль.
+If an icon is not found, the component renders an empty `<svg>` and logs an error to the console.
 
-## Категории иконок
+## Icon categories
 
-| Категория  | Описание                |
-| ---------- | ----------------------- |
-| `actions`  | Действия (copy, add)    |
-| `entrance` | Иконки для входа (user) |
-| _(root)_   | Общие иконки (spinner)  |
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><code>actions</code></td><td>Actions (copy, add)</td></tr>
+    <tr><td><code>entrance</code></td><td>Entry icons (user)</td></tr>
+    <tr><td><em>(root)</em></td><td>Common icons (spinner)</td></tr>
+  </tbody>
+</table>

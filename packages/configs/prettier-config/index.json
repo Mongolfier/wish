@@ -8,6 +8,5 @@
 	"endOfLine": "auto",
 	"trailingComma": "all",
 	"useTabs": true,
-	"singleAttributePerLine": true,
-	"parser": "babel-ts"
+	"singleAttributePerLine": true
 }

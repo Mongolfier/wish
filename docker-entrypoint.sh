@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-# Запуск nginx в фоне
+# Start nginx in the background
 nginx
 
-# Запуск Next.js приложения
+# Start Next.js application
 exec npm start

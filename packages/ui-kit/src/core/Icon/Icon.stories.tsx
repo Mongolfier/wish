@@ -1,6 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { iconsList } from './_stories/iconsList';
 import { Icon } from './Icon';
+
+const categoryOptions = iconsList.map(({ folder }) => (folder === 'root' ? '' : folder));
+const nameOptions = iconsList.flatMap(({ icons }) => icons);
 
 const meta = {
 	title: 'Core/Icon',
@@ -13,8 +17,16 @@ const meta = {
 		name: 'user',
 	},
 	argTypes: {
+		category: {
+			options: categoryOptions,
+			control: {
+				type: 'select',
+				labels: { '': '(root)' },
+			},
+		},
 		name: {
-			control: 'text',
+			options: nameOptions,
+			control: { type: 'select' },
 		},
 	},
 } satisfies Meta<typeof Icon>;
