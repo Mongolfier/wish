@@ -1,3 +1,5 @@
+'use client';
+
 import { type FC, type SVGProps, useEffect, useState } from 'react';
 
 import { type Icons } from './icons.types';

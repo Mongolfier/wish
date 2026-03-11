@@ -1,12 +1,36 @@
 services:
+  nginx:
+    image: nginx:alpine
+    container_name: wish-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./.nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /app/registry/certs:/etc/nginx/ssl:ro
+    depends_on:
+      - wish-app
+      - wish-storybook
+    restart: unless-stopped
+
   wish-app:
     build:
       context: .
       dockerfile: Dockerfile
-    image: wish-react-app:latest
+    image: ${DOCKER_REGISTRY}/wish-react-app:latest
     container_name: wish-app
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     restart: unless-stopped
     environment:
       - NODE_ENV=production
+
+  wish-storybook:
+    build:
+      context: .
+      dockerfile: Dockerfile.storybook
+    image: ${DOCKER_REGISTRY}/wish-storybook:latest
+    container_name: wish-storybook
+    expose:
+      - "80"
+    restart: unless-stopped

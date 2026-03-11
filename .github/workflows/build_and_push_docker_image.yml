@@ -2,47 +2,69 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
-  build_and_push_image:
+  build_and_push_images:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Add registry to /etc/hosts
-      run: echo "${{ secrets.SERVER_URL }} ${{ secrets.REGISTRY }}" | sudo tee -a /etc/hosts
-    
-    - name: Install CA certificate
-      run: |
-        sudo mkdir -p /etc/docker/certs.d/${{ secrets.REGISTRY }}:5000
-        echo "${{ secrets.CA_CERT }}" | sudo tee /etc/docker/certs.d/${{ secrets.REGISTRY }}:5000/ca.crt
-        sudo systemctl restart docker
+      - name: Add registry to /etc/hosts
+        run: echo "${{ secrets.SERVER_URL }} ${{ secrets.REGISTRY }}" | sudo tee -a /etc/hosts
 
-    - name: Build and push Docker image
-      run: |
-        trap "docker logout ${{ secrets.REGISTRY }}:5000 || true" EXIT
-        VERSION=$(date +%s)
-        docker build . --file Dockerfile --tag ${{ secrets.REGISTRY }}:5000/wish-react-app:$VERSION
-        docker tag ${{ secrets.REGISTRY }}:5000/wish-react-app:$VERSION ${{ secrets.REGISTRY }}:5000/wish-react-app:latest
-        docker login -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_PASS }} ${{ secrets.REGISTRY }}:5000
-        docker push --all-tags ${{ secrets.REGISTRY }}:5000/wish-react-app
-        docker logout ${{ secrets.REGISTRY }}:5000
+      - name: Install CA certificate
+        run: |
+          sudo mkdir -p /etc/docker/certs.d/${{ secrets.REGISTRY }}:5000
+          echo "${{ secrets.CA_CERT }}" | sudo tee /etc/docker/certs.d/${{ secrets.REGISTRY }}:5000/ca.crt
+          sudo systemctl restart docker
+
+      - name: Build and push Docker images
+        run: |
+          trap "docker logout ${{ secrets.REGISTRY }}:5000 || true" EXIT
+          VERSION=$(date +%s)
+          docker login -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_PASS }} ${{ secrets.REGISTRY }}:5000
+
+          docker build . --file Dockerfile --tag ${{ secrets.REGISTRY }}:5000/wish-react-app:$VERSION
+          docker tag ${{ secrets.REGISTRY }}:5000/wish-react-app:$VERSION ${{ secrets.REGISTRY }}:5000/wish-react-app:latest
+          docker push --all-tags ${{ secrets.REGISTRY }}:5000/wish-react-app
+
+          docker build . --file Dockerfile.storybook --tag ${{ secrets.REGISTRY }}:5000/wish-storybook:$VERSION
+          docker tag ${{ secrets.REGISTRY }}:5000/wish-storybook:$VERSION ${{ secrets.REGISTRY }}:5000/wish-storybook:latest
+          docker push --all-tags ${{ secrets.REGISTRY }}:5000/wish-storybook
+
+          docker logout ${{ secrets.REGISTRY }}:5000
 
   deploy_to_server:
-    needs: build_and_push_image
+    needs: build_and_push_images
     runs-on: ubuntu-latest
     steps:
-      - name: Pull and run latest wish app image
+      - uses: actions/checkout@v4
+
+      - name: Copy configs to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_URL }}
+          username: ${{ secrets.USER }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SERVER_PRIVATE_SSH_KEY }}
+          source: 'docker-compose.yml,.nginx/nginx.conf'
+          target: /app/wish
+
+      - name: Pull and run latest images
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SERVER_URL }}
           username: ${{ secrets.USER }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SERVER_PRIVATE_SSH_KEY }}
+          envs: DOCKER_REGISTRY
           script: |
             cd /app/wish
             docker login -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_PASS }} ${{ secrets.REGISTRY }}:5000
-            docker compose pull
-            docker compose up -d
+            DOCKER_REGISTRY=$DOCKER_REGISTRY docker compose pull
+            DOCKER_REGISTRY=$DOCKER_REGISTRY docker compose up -d
             docker logout ${{ secrets.REGISTRY }}:5000
+            docker exec wish-storybook nginx -s reload
+        env:
+          DOCKER_REGISTRY: ${{ secrets.REGISTRY }}:5000

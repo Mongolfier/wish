@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
 	transpilePackages: ['@wish/ui-kit'],
 	experimental: {
 		reactCompiler: true,
+		optimizePackageImports: ['@wish/ui-kit'],
 	},
 };
 
