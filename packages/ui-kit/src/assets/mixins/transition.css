@@ -1,0 +1,5 @@
+@define-mixin transition $property: all, $duration: 0.2s {
+	transition-timing-function: ease-in-out;
+	transition-duration: $duration;
+	transition-property: $property;
+}

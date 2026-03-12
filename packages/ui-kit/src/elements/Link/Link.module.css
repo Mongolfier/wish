@@ -1,0 +1,58 @@
+@import url('../../assets/mixins/transition.css');
+
+.link {
+	padding: 0;
+	font-family: var(--font_family-body, Montserrat);
+	font-weight: var(--font-weight-medium, 500);
+	text-decoration: none;
+	letter-spacing: var(--font-letter_spacing-normal, 0);
+	cursor: pointer;
+	background: none;
+	border: none;
+
+	color: var(--colors-neutral-dark-100, #0b1016);
+
+	&:not(.disabled) {
+		@media (hover: hover) {
+			&:hover {
+				color: var(--colors-neutral-gray-70, #575c62);
+			}
+		}
+
+		&:active {
+			color: var(--colors-neutral-gray-70, #575c62);
+		}
+	}
+
+	@mixin transition color, 0.1s;
+}
+
+.link:focus-visible {
+	border-radius: var(--general-focus-border_xs, 4px);
+	outline: var(--general-focus-stroke_size, 1px) solid var(--colors-neutral-gray-70, #575c62);
+	outline-offset: var(--general-focus-padding_m, 4px);
+
+	&.medium {
+		border-radius: var(--text_button-dimension-general-focus-border_radius, 8px);
+	}
+}
+
+.disabled {
+	color: var(--colors-neutral-gray-60, #878b8f);
+	cursor: default;
+}
+
+.extraSmall {
+	font-size: var(--font-size-base-xs, 12px);
+	line-height: var(--font-line_height-s, 16px);
+}
+
+.small {
+	font-size: var(--font-size-base-s, 14px);
+	line-height: var(--font-line_height-sm, 20px);
+}
+
+.medium {
+	font-size: var(--font-size-base-m, 16px);
+	line-height: var(--font-line_height-m, 24px);
+}

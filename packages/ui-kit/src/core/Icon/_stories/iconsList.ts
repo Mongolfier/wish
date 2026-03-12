@@ -2,15 +2,172 @@
 
 export const iconsList: Array<{ folder: string; icons: string[] }> = [
 	{
-		folder: 'root',
-		icons: ['spinner'],
+		"folder": "root",
+		"icons": [
+			"spinner"
+		]
 	},
 	{
-		folder: 'actions',
-		icons: ['add', 'copy'],
+		"folder": "actions",
+		"icons": [
+			"add",
+			"close-panel",
+			"close",
+			"copy",
+			"download",
+			"edit",
+			"external",
+			"menu",
+			"more",
+			"open-in-full",
+			"open-panel",
+			"pause",
+			"play",
+			"remove",
+			"search",
+			"subnav"
+		]
 	},
 	{
-		folder: 'entrance',
-		icons: ['user'],
+		"folder": "arrows",
+		"icons": [
+			"arrow_down",
+			"arrow_left",
+			"arrow_right",
+			"arrow_up",
+			"back",
+			"tick_m_down",
+			"tick_m_left",
+			"tick_m_right",
+			"tick_m_up",
+			"tick_s_down",
+			"tick_s_up"
+		]
 	},
+	{
+		"folder": "checked",
+		"icons": [
+			"check",
+			"checkbox-checked",
+			"checkbox-empty",
+			"checkbox-Indeterminate",
+			"done-all",
+			"radio-selected",
+			"radio-unselected"
+		]
+	},
+	{
+		"folder": "entrance",
+		"icons": [
+			"logout",
+			"user"
+		]
+	},
+	{
+		"folder": "information",
+		"icons": [
+			"asterisk",
+			"attention-outline",
+			"attention",
+			"calendar-outline",
+			"calendar",
+			"computer",
+			"document",
+			"email-fill",
+			"email-outline",
+			"email",
+			"language",
+			"link",
+			"notification",
+			"password",
+			"pin",
+			"settings",
+			"storage",
+			"support-outline",
+			"support",
+			"synchronization",
+			"update",
+			"visibility-off",
+			"visibility"
+		]
+	},
+	{
+		"folder": "logo",
+		"icons": [
+			"apple",
+			"base-icon",
+			"base-logo",
+			"discord-brand",
+			"discord",
+			"facebook-brand",
+			"facebook",
+			"google-brand",
+			"google",
+			"instagram",
+			"lesta-brand-dark",
+			"lesta-brand-light",
+			"lesta",
+			"ok-brand",
+			"ok",
+			"reddit-brand",
+			"reddit",
+			"rutube-brand",
+			"rutube",
+			"steam-brand",
+			"steam-white",
+			"steam",
+			"telegram-brand",
+			"telegram",
+			"tiktok-brand",
+			"tiktok",
+			"twitch-brand",
+			"twitch",
+			"vk-brand",
+			"vk",
+			"windows",
+			"x-brand",
+			"x",
+			"yandex-brand",
+			"yandex",
+			"youtube-brand",
+			"youtube"
+		]
+	},
+	{
+		"folder": "markers",
+		"icons": [
+			"circle",
+			"marker",
+			"outlined-circle",
+			"pagination_m",
+			"pagination_s",
+			"slide"
+		]
+	},
+	{
+		"folder": "shop",
+		"icons": [
+			"bag",
+			"card",
+			"coin",
+			"favorite-outline",
+			"favorite",
+			"gift-outline",
+			"gift",
+			"promocode-outline",
+			"promocode",
+			"star-outline",
+			"star"
+		]
+	},
+	{
+		"folder": "sorting-and-filter",
+		"icons": [
+			"filter-outline",
+			"filter",
+			"sort-down",
+			"sort-up",
+			"sort"
+		]
+	}
 ];
