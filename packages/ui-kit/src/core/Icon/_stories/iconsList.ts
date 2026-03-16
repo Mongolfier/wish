@@ -95,8 +95,6 @@ export const iconsList: Array<{ folder: string; icons: string[] }> = [
 		"folder": "logo",
 		"icons": [
 			"apple",
-			"base-icon",
-			"base-logo",
 			"discord-brand",
 			"discord",
 			"facebook-brand",
@@ -104,9 +102,6 @@ export const iconsList: Array<{ folder: string; icons: string[] }> = [
 			"google-brand",
 			"google",
 			"instagram",
-			"lesta-brand-dark",
-			"lesta-brand-light",
-			"lesta",
 			"ok-brand",
 			"ok",
 			"reddit-brand",

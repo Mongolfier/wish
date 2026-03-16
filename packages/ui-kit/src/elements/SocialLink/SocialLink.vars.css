@@ -1,0 +1,14 @@
+:root {
+	--social_link-dimension-border_radius: var(--border_radius-round);
+	--social_link-dimension-size-line_height: var(--size-line_widht-var_01);
+	--social_link-dimension-size-base: var(--size-height_control-ml);
+	--social_link-dimension-size-icon: var(--size-icon-m);
+	--social_link-dimension-space_enter: var(--space-s-var_02);
+	--social_link-dimension-padding: var(--space-s-var_02);
+	--social_link-color-bg-hover: var(--colors-app-bg-trans-secondary);
+	--social_link-color-bg-active: var(--colors-app-bg-trans-secondary);
+	--social_link-color-bg-default: var(--colors-app-bg-trans-primary);
+	--social_link-color-stroke-default: var(--colors-app-stroke-third);
+	--social_link-color-stroke-hover: var(--colors-app-stroke-third);
+	--social_link-color-stroke-active: var(--colors-app-stroke-third);
+}

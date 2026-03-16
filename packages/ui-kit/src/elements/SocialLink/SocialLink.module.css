@@ -1,0 +1,45 @@
+@import url('../../assets/mixins/transition.css');
+@import url('./SocialLink.vars.css');
+
+.socialLink {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	width: var(--social_link-dimension-size-base, 48px);
+	height: var(--social_link-dimension-size-base, 48px);
+	text-decoration: none;
+	background: var(--social_link-color-bg-default, rgb(255 255 255 / 2%));
+	border: var(--social_link-dimension-size-line_height, 1px) solid
+		var(--social_link-color-stroke-default, rgb(255 255 255 / 10%));
+	border-radius: 50%;
+
+	@mixin transition background;
+}
+
+.socialLink:not(:disabled) {
+	@media (hover: hover) {
+		&:hover {
+			background: var(--social_link-color-bg-hover, rgb(255 255 255 / 5%));
+			border: var(--social_link-dimension-size-line_height, 1px) solid
+				var(--social_link-color-stroke-hover, rgb(255 255 255 / 10%));
+		}
+	}
+
+	&:active {
+		background: var(--social_link-color-bg-active, rgb(255 255 255 / 5%));
+		border: var(--social_link-dimension-size-line_height, 1px) solid
+			var(--social_link-color-stroke-active, rgb(255 255 255 / 10%));
+	}
+}
+
+.socialLink:focus-visible {
+	border-radius: 50%;
+	outline: var(--general-focus-stroke_size, 1px) solid var(--general-focus-stroke, #fff);
+	outline-offset: var(--general-focus-padding_s, 2px);
+}
+
+.icon {
+	width: var(--social_link-dimension-size-icon, 24px);
+	height: var(--social_link-dimension-size-icon, 24px);
+}
