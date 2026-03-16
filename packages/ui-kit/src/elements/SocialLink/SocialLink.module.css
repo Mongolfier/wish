@@ -1,0 +1,34 @@
+@import url('../../assets/mixins/transition.css');
+
+.socialLink {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	width: var(--button_social-dimension-size-base, 48px);
+	height: var(--button_social-dimension-size-base, 48px);
+	text-decoration: none;
+	background: var(--button_social-color-bg-default, rgb(255 255 255 / 2%));
+	border: var(--button_social-dimension-size-line_height, 1px) solid
+		var(--button_social-color-stroke-default, rgb(255 255 255 / 10%));
+	border-radius: 50%;
+
+	@mixin transition background;
+}
+
+.socialLink:not(:disabled) {
+	@media (hover: hover) {
+		&:hover {
+			background: var(--button_social-color-bg-hover, rgb(255 255 255 / 5%));
+			border:
+				var(--button_social-dimension-size-line_height, 1px)
+				solid
+				var(--button_social-color-stroke-hover, rgb(255 255 255 / 10%));
+		}
+	}
+}
+
+.icon {
+	width: var(--button_social-dimension-size-icon, 24px);
+	height: var(--button_social-dimension-size-icon, 24px);
+}
