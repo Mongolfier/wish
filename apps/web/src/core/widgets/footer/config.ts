@@ -8,16 +8,16 @@ export const contactsConfig: FooterConfig[] = [
 				name: 'dmitry',
 				links: [
 					{
-						name: 'github',
+						icon: { category: 'logo', name: 'github' },
 						link: 'https://github.com/Mongolfier',
 					},
 					{
-						name: 'telegram',
+						icon: { category: 'logo', name: 'telegram' },
 						link: 'https://t.me/DmitryMumrenkov',
 					},
 					{
-						name: 'email',
-						link: 'dmitrymumrenkov@gmail.com',
+						icon: { category: 'logo', name: 'email' },
+						link: 'mailto:dmitrymumrenkov@gmail.com',
 					},
 				],
 			},
@@ -30,16 +30,16 @@ export const contactsConfig: FooterConfig[] = [
 				name: 'nikolaj',
 				links: [
 					{
-						name: 'github',
-						link: 'TBD',
+						icon: { category: 'logo', name: 'github' },
+						link: 'https://github.com/Learningsome',
 					},
 					{
-						name: 'telegram',
+						icon: { category: 'logo', name: 'telegram' },
 						link: 'https://t.me/melting_sun',
 					},
 					{
-						name: 'email',
-						link: 'TBD',
+						icon: { category: 'logo', name: 'email' },
+						link: 'mailto:nikolajkashirskij@gmail.com',
 					},
 				],
 			},
@@ -52,15 +52,15 @@ export const contactsConfig: FooterConfig[] = [
 				name: 'igor',
 				links: [
 					{
-						name: 'github',
+						icon: { category: 'logo', name: 'github' },
 						link: 'TBD',
 					},
 					{
-						name: 'telegram',
+						icon: { category: 'logo', name: 'telegram' },
 						link: 'https://t.me/ataraxii_dev',
 					},
 					{
-						name: 'email',
+						icon: { category: 'logo', name: 'email' },
 						link: 'TBD',
 					},
 				],

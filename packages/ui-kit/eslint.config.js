@@ -10,7 +10,15 @@ import path from 'node:path';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default [
-	globalIgnores(['dist', 'node_modules', 'eslint.config.js', '**/*.mjs']),
+	globalIgnores([
+		'dist',
+		'node_modules',
+		'eslint.config.js',
+		'**/*.mjs',
+		'src/core/Icon/_stories/iconsList.ts',
+		'src/core/Icon/icons.types.ts',
+		'src/plugins/generateBarrelPlugin.ts',
+	]),
 	...eslintConfig,
 	js.configs.recommended,
 	...tseslint.configs.recommended,

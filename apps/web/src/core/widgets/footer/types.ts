@@ -1,9 +1,11 @@
+import { type IconProps } from '@wish/ui-kit';
+
 export interface FooterConfig {
 	specialists: 'developers' | 'devops' | 'designers';
 	list: {
 		name: string;
 		links: {
-			name: string;
+			icon: IconProps;
 			link: string;
 		}[];
 	}[];
