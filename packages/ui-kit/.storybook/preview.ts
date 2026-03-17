@@ -5,6 +5,7 @@ import './preview.css';
 export default {
 	tags: ['autodocs'],
 	parameters: {
+		layout: 'centered',
 		controls: {
 			matchers: {
 				color: /(background|color)$/i,

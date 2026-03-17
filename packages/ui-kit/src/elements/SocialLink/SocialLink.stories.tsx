@@ -7,11 +7,11 @@ const meta = {
 	component: SocialLink,
 	argTypes: {
 		onClick: {
-			description: 'Функция, вызываемая при клике на кнопку',
+			description: 'Function called when the button is clicked',
 		},
 		ref: {
 			control: false,
-			description: 'Ссылка на DOM-элемент кнопки для прямого доступа',
+			description: 'Ref to the button DOM element for direct access',
 		},
 	},
 } satisfies Meta<typeof SocialLink>;
@@ -26,6 +26,7 @@ export const Default: Story = {
 		</div>
 	),
 	args: {
+		style: { color: 'white' },
 		icon: {
 			category: 'logo',
 			name: 'apple',

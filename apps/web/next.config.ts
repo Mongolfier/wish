@@ -5,7 +5,6 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
 	output: process.env.ENVIRONMENT === 'docker' ? 'standalone' : undefined,
-	transpilePackages: ['@wish/ui-kit'],
 	experimental: {
 		reactCompiler: true,
 		optimizePackageImports: ['@wish/ui-kit'],

@@ -1,7 +1,7 @@
 import { type AnchorHTMLAttributes, forwardRef } from 'react';
 import cn from 'classnames';
 
-import { Icon, type IconProps } from '@/core/Icon';
+import { Icon, type IconProps } from '../../core/Icon';
 
 import css from './SocialLink.module.css';
 

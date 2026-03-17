@@ -40,6 +40,6 @@ export const ExampleIcon: Story = {
 		height: 44,
 		name: 'user',
 		category: 'entrance',
-		style: { color: '#fff' },
+		style: { color: '#000' },
 	},
 };

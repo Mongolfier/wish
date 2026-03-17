@@ -26,7 +26,8 @@
 		"resolveJsonModule": true,
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/*": ["./src/*"],
+			"@wish/ui-kit": ["../../packages/ui-kit/dist"]
 		}
 	},
 	"include": [

@@ -13,8 +13,8 @@
 	],
 	"prettier": "prettier-config",
 	"scripts": {
-		"dev": "pnpm --filter @wish/web dev",
-		"build": "pnpm --filter @wish/web build",
+		"dev": "pnpm run build:ui-kit && pnpm --parallel --filter @wish/ui-kit --filter @wish/web run dev",
+		"build": "pnpm run build:ui-kit && pnpm --filter @wish/web build",
 		"lint": "pnpm -r lint",
 		"lint:css": "pnpm --filter @wish/web run lint:css",
 		"format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",

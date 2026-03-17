@@ -17,7 +17,7 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 
 ENV ENVIRONMENT=docker
-RUN pnpm --filter @wish/web build
+RUN pnpm build
 
 # --- Production image ---
 FROM node:22-alpine AS runner

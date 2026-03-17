@@ -93,6 +93,9 @@
 	--colors-grd-blue_violet-100_100: #833fe7;
 	--colors-app-text-primary: var(--colors-neutral-dark-100);
 	--colors-app-text-secondary: var(--colors-neutral-white-100);
+	--colors-app-bg-trans-primary: var(--colors-neutral-white-2_trans);
+	--colors-app-bg-trans-secondary: var(--colors-neutral-white-5_trans);
+	--colors-app-stroke-third: var(--colors-neutral-white-10_trans);
 
 	/* 2. DIMENSIONS */
 	--size-screen-xxs_min: 360px;
@@ -128,6 +131,17 @@
 	--size-base-xl-var_02: 76px;
 	--size-base-xl-var_03: 96px;
 	--size-base-xl-var_04: 128px;
+	--size-line_widht-var_02: var(--size-base-xs-var_02);
+	--size-line_widht-var_01: var(--size-base-xs-var_01);
+	--size-line_width-s: var(--size-base-xs-var_01);
+	--size-line_width-m: var(--size-base-xs-var_02);
+	--size-height_control-xxs: var(--size-base-s-var_03);
+	--size-height_control-xs: var(--size-base-m-var_01);
+	--size-height_control-s: var(--size-base-m-var_02);
+	--size-height_control-sm: var(--size-base-m-var_03);
+	--size-height_control-m: var(--size-base-l-var_01);
+	--size-height_control-ml: var(--size-base-l-var_02);
+	--size-height_control-l: var(--size-base-l-var_03);
 	--space-xs-var_00: var(--size-base-xs-var_00);
 	--space-xs-var_01: var(--size-base-xs-var_01);
 	--space-xs-var_02: var(--size-base-xs-var_02);
