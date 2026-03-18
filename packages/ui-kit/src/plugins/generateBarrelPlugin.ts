@@ -38,11 +38,7 @@ export function generateBarrelPlugin(args: GenerateBarrelPluginArgs): Plugin {
 	return {
 		name: 'generate-barrel',
 		configResolved(config) {
-			generateBarrel(
-				resolve(config.root, srcDir),
-				resolve(config.root, outputFile),
-				exclude,
-			);
+			generateBarrel(resolve(config.root, srcDir), resolve(config.root, outputFile), exclude);
 		},
 	};
 }

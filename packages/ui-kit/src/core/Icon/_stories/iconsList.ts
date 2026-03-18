@@ -97,7 +97,6 @@ export const iconsList: Array<{ folder: string; icons: string[] }> = [
 			"apple",
 			"discord-brand",
 			"discord",
-			"email",
 			"facebook-brand",
 			"facebook",
 			"github",

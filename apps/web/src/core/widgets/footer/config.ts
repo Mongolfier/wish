@@ -16,7 +16,7 @@ export const contactsConfig: FooterConfig[] = [
 						link: 'https://t.me/DmitryMumrenkov',
 					},
 					{
-						icon: { category: 'logo', name: 'email' },
+						icon: { category: 'information', name: 'email-outline' },
 						link: 'mailto:dmitrymumrenkov@gmail.com',
 					},
 				],
@@ -38,7 +38,7 @@ export const contactsConfig: FooterConfig[] = [
 						link: 'https://t.me/melting_sun',
 					},
 					{
-						icon: { category: 'logo', name: 'email' },
+						icon: { category: 'information', name: 'email-outline' },
 						link: 'mailto:nikolajkashirskij@gmail.com',
 					},
 				],
@@ -58,10 +58,6 @@ export const contactsConfig: FooterConfig[] = [
 					{
 						icon: { category: 'logo', name: 'telegram' },
 						link: 'https://t.me/ataraxii_dev',
-					},
-					{
-						icon: { category: 'logo', name: 'email' },
-						link: 'TBD',
 					},
 				],
 			},
