@@ -3,6 +3,7 @@
 export * from './core/Icon';
 export * from './elements/Button';
 export * from './elements/Link';
+export * from './elements/Select';
 export * from './elements/SocialLink';
 export * from './organisms/Footer';
 export * from './organisms/MainMenu';

@@ -61,6 +61,7 @@
 		"vitest": "^4.0.18"
 	},
 	"dependencies": {
-		"classnames": "^2.5.1"
+		"classnames": "^2.5.1",
+		"react-select": "^5.10.2"
 	}
 }
