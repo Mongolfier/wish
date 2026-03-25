@@ -9,10 +9,6 @@ const meta = {
 		onClick: {
 			description: 'Function called when the button is clicked',
 		},
-		ref: {
-			control: false,
-			description: 'Ref to the button DOM element for direct access',
-		},
 	},
 } satisfies Meta<typeof SocialLink>;
 

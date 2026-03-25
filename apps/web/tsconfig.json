@@ -22,7 +22,7 @@
 				"name": "next"
 			}
 		],
-		"allowJs": true,
+		"allowJs": false,
 		"resolveJsonModule": true,
 		"baseUrl": ".",
 		"paths": {

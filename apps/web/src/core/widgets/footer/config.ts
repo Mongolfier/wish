@@ -9,15 +9,15 @@ export const contactsConfig: FooterConfig[] = [
 				links: [
 					{
 						icon: { category: 'logo', name: 'github' },
-						link: 'https://github.com/Mongolfier',
+						href: 'https://github.com/Mongolfier',
 					},
 					{
 						icon: { category: 'logo', name: 'telegram' },
-						link: 'https://t.me/DmitryMumrenkov',
+						href: 'https://t.me/DmitryMumrenkov',
 					},
 					{
 						icon: { category: 'information', name: 'email-outline' },
-						link: 'mailto:dmitrymumrenkov@gmail.com',
+						href: 'mailto:dmitrymumrenkov@gmail.com',
 					},
 				],
 			},
@@ -31,15 +31,15 @@ export const contactsConfig: FooterConfig[] = [
 				links: [
 					{
 						icon: { category: 'logo', name: 'github' },
-						link: 'https://github.com/Learningsome',
+						href: 'https://github.com/Learningsome',
 					},
 					{
 						icon: { category: 'logo', name: 'telegram' },
-						link: 'https://t.me/melting_sun',
+						href: 'https://t.me/melting_sun',
 					},
 					{
 						icon: { category: 'information', name: 'email-outline' },
-						link: 'mailto:nikolajkashirskij@gmail.com',
+						href: 'mailto:nikolajkashirskij@gmail.com',
 					},
 				],
 			},
@@ -53,11 +53,11 @@ export const contactsConfig: FooterConfig[] = [
 				links: [
 					{
 						icon: { category: 'logo', name: 'github' },
-						link: 'TBD',
+						href: 'TBD',
 					},
 					{
 						icon: { category: 'logo', name: 'telegram' },
-						link: 'https://t.me/ataraxii_dev',
+						href: 'https://t.me/ataraxii_dev',
 					},
 				],
 			},
