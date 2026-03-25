@@ -4,13 +4,12 @@
 	padding: 0;
 	font-family: var(--font_family-body, Montserrat);
 	font-weight: var(--font-weight-medium, 500);
+	color: var(--colors-neutral-dark-100, #0b1016);
 	text-decoration: none;
 	letter-spacing: var(--font-letter_spacing-normal, 0);
 	cursor: pointer;
 	background: none;
 	border: none;
-
-	color: var(--colors-neutral-dark-100, #0b1016);
 
 	&:not(.disabled) {
 		@media (hover: hover) {

@@ -1,5 +1,12 @@
 {
-	"nikolaj": "Николай",
-	"dmitry": "Дмитрий",
-	"igor": "Игорь"
+	"names": {
+		"nikolaj": "Николай",
+		"dmitry": "Дмитрий",
+		"igor": "Игорь"
+	},
+	"specialists": {
+		"developers": "Разработчики",
+		"devops": "DevOps",
+		"designers": "Дизайнеры"
+	}
 }

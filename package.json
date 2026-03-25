@@ -13,10 +13,11 @@
 	],
 	"prettier": "prettier-config",
 	"scripts": {
-		"dev": "pnpm run build:ui-kit && pnpm --parallel --filter @wish/ui-kit --filter @wish/web run dev",
+		"dev": "pnpm run build:ui-kit && pnpm --filter @wish/web run dev",
+		"dev:watch": "pnpm run build:ui-kit && pnpm --parallel --filter @wish/ui-kit --filter @wish/web run dev",
 		"build": "pnpm run build:ui-kit && pnpm --filter @wish/web build",
 		"lint": "pnpm -r lint",
-		"lint:css": "pnpm --filter @wish/web run lint:css",
+		"lint:css": "pnpm -r run lint:css",
 		"format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
 		"storybook": "pnpm --filter @wish/ui-kit storybook",
 		"build:storybook": "pnpm --filter @wish/ui-kit build:storybook",
@@ -32,6 +33,7 @@
 		"husky": "^9.1.7",
 		"prettier": "^3.3.3",
 		"prettier-config": "workspace:*",
+		"typescript": "~5.9.3",
 		"vitest": "^4.0.18"
 	},
 	"pnpm": {

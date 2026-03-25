@@ -2,12 +2,12 @@
 
 .footer {
 	box-sizing: border-box;
-	width: 100%;
-	background-color: var(--footer-background, #000);
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: 100%;
 	padding: var(--footer-padding_hor, 40px) var(--footer-padding_vert, 76px);
+	background-color: var(--footer-background, #000);
 }
 
 .mainWrapper {

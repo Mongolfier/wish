@@ -8,12 +8,12 @@
 	justify-content: center;
 	width: var(--social_link-dimension-size-base, 48px);
 	height: var(--social_link-dimension-size-base, 48px);
+	color: var(--social_link-color-text-default, #fff);
 	text-decoration: none;
 	background: var(--social_link-color-bg-default, rgb(255 255 255 / 2%));
 	border: var(--social_link-dimension-size-line_height, 1px) solid
 		var(--social_link-color-stroke-default, rgb(255 255 255 / 10%));
 	border-radius: 50%;
-	color: var(--social_link-color-text-default, #fff);
 
 	@mixin transition background;
 }

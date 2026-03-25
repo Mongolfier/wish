@@ -25,6 +25,7 @@ export default defineConfig((): UserConfig => {
 			}),
 		],
 		build: {
+			emptyOutDir: false,
 			lib: {
 				entry: resolve(__dirname, 'src/index.ts'),
 				formats: ['es'],
@@ -32,7 +33,7 @@ export default defineConfig((): UserConfig => {
 				cssFileName: 'styles',
 			},
 			rollupOptions: {
-				external: ['react', 'react-dom', 'react/jsx-runtime'],
+				external: ['react', 'react-dom', 'react/jsx-runtime', 'react-select', /@emotion\/.*/],
 				output: {
 					// Marks the entire bundle as a client boundary so consumers (e.g. Next.js)
 					// don't need 'use client' on individual components that use hooks.
