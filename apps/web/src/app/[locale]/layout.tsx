@@ -33,7 +33,7 @@ export default async function LocaleLayout({
 	return (
 		<html lang={locale}>
 			<RootBody>
-				<NextIntlClientProvider messages={{ nav: messages.nav, home: messages.home }}>
+				<NextIntlClientProvider messages={{ nav: messages.nav, home: messages.home, developers: messages.developers }}>
 					{children}
 				</NextIntlClientProvider>
 			</RootBody>

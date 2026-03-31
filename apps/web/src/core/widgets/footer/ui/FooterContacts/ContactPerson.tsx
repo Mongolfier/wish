@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { SocialLink } from '@wish/ui-kit';
 
 import { type ContactPersonConfig } from '../../types';
@@ -8,20 +9,26 @@ interface ContactPersonProps {
 	person: ContactPersonConfig;
 }
 
-export const ContactPerson = ({ person }: ContactPersonProps) => (
-	<li>
-		<h3>{person.name}</h3>
-		<nav aria-label={`${person.name} contacts`}>
-			<ul className={css.links}>
-				{person.links.map((link) => (
-					<li key={link.href}>
-						<SocialLink
-							icon={link.icon}
-							href={link.href}
-						/>
-					</li>
-				))}
-			</ul>
-		</nav>
-	</li>
-);
+export const ContactPerson = ({ person }: ContactPersonProps) => {
+	const t = useTranslations('developers');
+	const displayName = t(`names.${person.name}`);
+
+	return (
+		<li>
+			<h3>{displayName}</h3>
+
+			<nav aria-label={`${displayName} contacts`}>
+				<ul className={css.links}>
+					{person.links.map((link) => (
+						<li key={link.href}>
+							<SocialLink
+								icon={link.icon}
+								href={link.href}
+							/>
+						</li>
+					))}
+				</ul>
+			</nav>
+		</li>
+	);
+};
