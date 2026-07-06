@@ -41,5 +41,33 @@ services:
       dockerfile: Dockerfile
     ports:
       - '8000:8000'
+    env_file:
+      - ./apps/backend/.env
     environment:
+      DATABASE_URL: postgresql+psycopg://wish:wish@db:5432/wish
       ALLOWED_ORIGINS: 'http://localhost:3000,http://127.0.0.1:3000'
+      OAUTH_REDIRECT_BASE: http://localhost:3000
+      GOOGLE_OAUTH_REDIRECT_URI: http://localhost:3000/api/auth/google/callback
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    container_name: wish-db
+    environment:
+      POSTGRES_USER: wish
+      POSTGRES_PASSWORD: wish
+      POSTGRES_DB: wish
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U wish -d wish']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:

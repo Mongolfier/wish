@@ -8,6 +8,6 @@ describe('routes', () => {
 	});
 
 	it('contains all expected route keys', () => {
-		expect(Object.keys(routes)).toContain('index');
+		expect(Object.keys(routes)).toEqual(['index', 'auth', 'authRegister']);
 	});
 });

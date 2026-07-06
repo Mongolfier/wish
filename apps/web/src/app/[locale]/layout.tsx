@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 
+import { Providers } from '@/core/app/ui/Providers/Providers';
 import { RootBody } from '@/core/app/ui/RootBody/RootBody';
 import { routing } from '@/i18n/routing';
 
@@ -33,8 +34,15 @@ export default async function LocaleLayout({
 	return (
 		<html lang={locale}>
 			<RootBody>
-				<NextIntlClientProvider messages={{ nav: messages.nav, home: messages.home, developers: messages.developers }}>
-					{children}
+				<NextIntlClientProvider
+					messages={{
+						nav: messages.nav,
+						home: messages.home,
+						developers: messages.developers,
+						auth: messages.auth,
+					}}
+				>
+					<Providers>{children}</Providers>
 				</NextIntlClientProvider>
 			</RootBody>
 		</html>

@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import ReactSelect, { type GroupBase, type Props } from 'react-select';
 
 export interface SelectProps<
@@ -13,5 +14,13 @@ export const Select = <
 >(
 	props: SelectProps<Option, IsMulti, Group>,
 ) => {
-	return <ReactSelect {...props} />;
+	const reactId = useId();
+	const { instanceId, ...rest } = props;
+
+	return (
+		<ReactSelect
+			{...rest}
+			instanceId={instanceId ?? reactId.replace(/:/g, '')}
+		/>
+	);
 };

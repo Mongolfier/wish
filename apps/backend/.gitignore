@@ -5,6 +5,9 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 .env
+wish.db
+wish.db-shm
+wish.db-wal
 *.egg-info/
 dist/
 build/
