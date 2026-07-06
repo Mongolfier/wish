@@ -46,20 +46,20 @@ pnpm test:pip
 
 ## Environment
 
-| Variable | Default | Description |
-| -------- | ------- | ----------- |
-| `DATABASE_URL` | `sqlite:///./wish.db` | SQLAlchemy database URL |
-| `SECRET_KEY` | *(dev default)* | Session signing secret (min 32 chars in production) |
-| `ALLOWED_ORIGINS` | `http://localhost:3000` | Comma-separated CORS allowed origins |
-| `OAUTH_REDIRECT_BASE` | `http://localhost:3000` | Public Next.js URL (post-login redirect) |
-| `GOOGLE_OAUTH_REDIRECT_URI` | `{OAUTH_REDIRECT_BASE}/api/auth/google/callback` | **Register in Google Console** |
-| `GOOGLE_CLIENT_ID` | — | Google OAuth client ID |
-| `GOOGLE_CLIENT_SECRET` | — | Google OAuth client secret |
-| `SMTP_HOST` | — | SMTP server (Selectel: `smtp.mail.selcloud.ru`) |
-| `SMTP_PORT` | `1127` | `1127` = SSL, `1126` = STARTTLS |
-| `SMTP_USER` | — | SMTP login |
-| `SMTP_PASSWORD` | — | SMTP API key / password |
-| `SMTP_FROM` | — | Sender address on verified domain |
+| Variable                    | Default                                          | Description                                         |
+| --------------------------- | ------------------------------------------------ | --------------------------------------------------- |
+| `DATABASE_URL`              | `sqlite:///./wish.db`                            | SQLAlchemy database URL                             |
+| `SECRET_KEY`                | _(dev default)_                                  | Session signing secret (min 32 chars in production) |
+| `ALLOWED_ORIGINS`           | `http://localhost:3000`                          | Comma-separated CORS allowed origins                |
+| `OAUTH_REDIRECT_BASE`       | `http://localhost:3000`                          | Public Next.js URL (post-login redirect)            |
+| `GOOGLE_OAUTH_REDIRECT_URI` | `{OAUTH_REDIRECT_BASE}/api/auth/google/callback` | **Register in Google Console**                      |
+| `GOOGLE_CLIENT_ID`          | —                                                | Google OAuth client ID                              |
+| `GOOGLE_CLIENT_SECRET`      | —                                                | Google OAuth client secret                          |
+| `SMTP_HOST`                 | —                                                | SMTP server (Selectel: `smtp.mail.selcloud.ru`)     |
+| `SMTP_PORT`                 | `1127`                                           | `1127` = SSL, `1126` = STARTTLS                     |
+| `SMTP_USER`                 | —                                                | SMTP login                                          |
+| `SMTP_PASSWORD`             | —                                                | SMTP API key / password                             |
+| `SMTP_FROM`                 | —                                                | Sender address on verified domain                   |
 
 Copy `.env.example` to `.env` and fill in Google credentials.
 
@@ -96,16 +96,16 @@ When `SMTP_DEV_LOG_CODES=true`, after clicking «Отправить код» che
 
 ## Auth API
 
-| Method | Path | Description |
-| ------ | ---- | ----------- |
-| POST | `/api/auth/register` | Register with email/password |
-| POST | `/api/auth/login` | Login with email/password |
-| POST | `/api/auth/logout` | Logout |
-| GET | `/api/auth/me` | Current user |
-| POST | `/api/auth/email/send-code` | Send 6-digit registration code to email |
-| POST | `/api/auth/email/verify-register` | Verify code and create account |
-| GET | `/api/auth/google` | Google OAuth redirect |
-| GET | `/api/auth/google/callback` | Google OAuth callback |
+| Method | Path                              | Description                             |
+| ------ | --------------------------------- | --------------------------------------- |
+| POST   | `/api/auth/register`              | Register with email/password            |
+| POST   | `/api/auth/login`                 | Login with email/password               |
+| POST   | `/api/auth/logout`                | Logout                                  |
+| GET    | `/api/auth/me`                    | Current user                            |
+| POST   | `/api/auth/email/send-code`       | Send 6-digit registration code to email |
+| POST   | `/api/auth/email/verify-register` | Verify code and create account          |
+| GET    | `/api/auth/google`                | Google OAuth redirect                   |
+| GET    | `/api/auth/google/callback`       | Google OAuth callback                   |
 
 Google redirect URI: `GOOGLE_OAUTH_REDIRECT_URI` → `http://localhost:3000/api/auth/google/callback`
 
