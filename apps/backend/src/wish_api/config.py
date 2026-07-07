@@ -14,6 +14,8 @@ class Settings(BaseSettings):
 		extra="ignore",
 	)
 
+	environment: str = "dev"
+
 	allowed_origins: str = "http://localhost:3000,http://127.0.0.1:3000"
 	database_url: str = "sqlite:///./wish.db"
 	secret_key: str = "dev-secret-change-in-production-min-32-chars!!"
@@ -45,6 +47,10 @@ class Settings(BaseSettings):
 	email_code_ttl_seconds: int = 900
 	email_code_resend_seconds: int = 60
 	email_code_max_attempts: int = 5
+
+	@property
+	def docs_enabled(self) -> bool:
+		return self.environment.strip().lower() == "dev"
 
 	@property
 	def allowed_origins_list(self) -> list[str]:

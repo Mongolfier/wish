@@ -7,4 +7,5 @@
 .idea
 .env*
 !.env.example
+!apps/backend/.env.prod
 apps/storybook

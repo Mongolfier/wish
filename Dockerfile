@@ -7,6 +7,7 @@ FROM base AS builder
 
 COPY pnpm-lock.yaml pnpm-workspace.yaml package.json ./
 COPY apps/web/package.json ./apps/web/package.json
+COPY packages/api-client/package.json ./packages/api-client/package.json
 COPY packages/ui-kit/package.json ./packages/ui-kit/package.json
 COPY packages/configs/eslint-config/package.json ./packages/configs/eslint-config/package.json
 COPY packages/configs/stylelint-config/package.json ./packages/configs/stylelint-config/package.json
@@ -17,6 +18,7 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 
 ENV ENVIRONMENT=docker
+ENV API_ORIGIN=http://api:8000
 RUN pnpm build
 
 # --- Production image ---

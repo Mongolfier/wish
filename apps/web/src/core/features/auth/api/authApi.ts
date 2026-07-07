@@ -1,9 +1,6 @@
-export type User = {
-	id: string;
-	email: string | null;
-	display_name: string | null;
-	avatar_url: string | null;
-};
+import { browserApiClient, type components } from '@wish/api-client';
+
+export type User = components['schemas']['UserResponse'];
 
 export class AuthError extends Error {
 	constructor(
@@ -25,54 +22,55 @@ function parseRetryAfterHeader(response: Response): number | undefined {
 	return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
 }
 
-async function parseAuthError(response: Response): Promise<never> {
-	const data = (await response.json().catch(() => ({}))) as { detail?: string };
+function throwAuthError(error: unknown, response: Response): never {
+	const detail =
+		typeof error === 'object' && error !== null && 'detail' in error && typeof error.detail === 'string'
+			? error.detail
+			: 'unknown';
 	const retryAfterSeconds = parseRetryAfterHeader(response);
-	throw new AuthError(data.detail ?? 'unknown', retryAfterSeconds);
+	throw new AuthError(detail, retryAfterSeconds);
 }
 
 export async function fetchMe(): Promise<User | null> {
-	const response = await fetch('/api/auth/me', { credentials: 'include' });
+	const { data, error, response } = await browserApiClient.GET('/api/auth/me', {
+		credentials: 'include',
+	});
 
 	if (response.status === 401) {
 		return null;
 	}
 
-	if (!response.ok) {
-		await parseAuthError(response);
+	if (error) {
+		throwAuthError(error, response);
 	}
 
-	return response.json() as Promise<User>;
+	return data!;
 }
 
 export async function login(email: string, password: string): Promise<User> {
-	const response = await fetch('/api/auth/login', {
-		method: 'POST',
+	const { data, error, response } = await browserApiClient.POST('/api/auth/login', {
 		credentials: 'include',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ email, password }),
+		body: { email, password },
 	});
 
-	if (!response.ok) {
-		await parseAuthError(response);
+	if (error) {
+		throwAuthError(error, response);
 	}
 
-	return response.json() as Promise<User>;
+	return data!;
 }
 
 export async function register(email: string, password: string, displayName?: string): Promise<User> {
-	const response = await fetch('/api/auth/register', {
-		method: 'POST',
+	const { data, error, response } = await browserApiClient.POST('/api/auth/register', {
 		credentials: 'include',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ email, password, display_name: displayName }),
+		body: { email, password, display_name: displayName },
 	});
 
-	if (!response.ok) {
-		await parseAuthError(response);
+	if (error) {
+		throwAuthError(error, response);
 	}
 
-	return response.json() as Promise<User>;
+	return data!;
 }
 
 export type SendRegistrationCodeResult = {
@@ -80,15 +78,13 @@ export type SendRegistrationCodeResult = {
 };
 
 export async function sendRegistrationCode(email: string, locale: string): Promise<SendRegistrationCodeResult> {
-	const response = await fetch('/api/auth/email/send-code', {
-		method: 'POST',
+	const { error, response } = await browserApiClient.POST('/api/auth/email/send-code', {
 		credentials: 'include',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ email, locale }),
+		body: { email, locale },
 	});
 
-	if (!response.ok) {
-		await parseAuthError(response);
+	if (error) {
+		throwAuthError(error, response);
 	}
 
 	return {
@@ -102,23 +98,20 @@ export async function verifyRegistration(
 	password: string,
 	displayName?: string,
 ): Promise<User> {
-	const response = await fetch('/api/auth/email/verify-register', {
-		method: 'POST',
+	const { data, error, response } = await browserApiClient.POST('/api/auth/email/verify-register', {
 		credentials: 'include',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ email, code, password, display_name: displayName }),
+		body: { email, code, password, display_name: displayName },
 	});
 
-	if (!response.ok) {
-		await parseAuthError(response);
+	if (error) {
+		throwAuthError(error, response);
 	}
 
-	return response.json() as Promise<User>;
+	return data!;
 }
 
 export async function logout(): Promise<void> {
-	await fetch('/api/auth/logout', {
-		method: 'POST',
+	await browserApiClient.POST('/api/auth/logout', {
 		credentials: 'include',
 	});
 }

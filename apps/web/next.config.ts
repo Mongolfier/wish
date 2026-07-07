@@ -11,12 +11,31 @@ const nextConfig: NextConfig = {
 	},
 	async rewrites() {
 		const apiOrigin = process.env.API_ORIGIN ?? 'http://127.0.0.1:8000';
-		return [
+		const rewrites = [
 			{
 				source: '/api/:path*',
 				destination: `${apiOrigin}/api/:path*`,
 			},
 		];
+
+		if (process.env.NODE_ENV === 'development') {
+			rewrites.push(
+				{
+					source: '/docs',
+					destination: `${apiOrigin}/docs`,
+				},
+				{
+					source: '/redoc',
+					destination: `${apiOrigin}/redoc`,
+				},
+				{
+					source: '/openapi.json',
+					destination: `${apiOrigin}/openapi.json`,
+				},
+			);
+		}
+
+		return rewrites;
 	},
 };
 

@@ -1,6 +1,23 @@
 # Wish API
 
-FastAPI service. OpenAPI / Swagger UI: http://localhost:8000/docs
+FastAPI service with built-in **Swagger UI** and **ReDoc**.
+
+| URL                                | When                                       |
+| ---------------------------------- | ------------------------------------------ |
+| http://localhost:8000/docs         | API running (`pnpm api:dev`)               |
+| http://localhost:3000/docs         | Web dev + API (Next.js proxies to backend) |
+| http://localhost:8000/redoc        | Alternative API docs                       |
+| http://localhost:8000/openapi.json | OpenAPI 3.1 spec                           |
+
+Set `ENVIRONMENT=production` (or `docker`) to disable Swagger and `/openapi.json`.
+
+## TypeScript client
+
+The web app uses `@wish/api-client`, generated from this API's OpenAPI schema:
+
+```bash
+pnpm api:openapi   # export spec + regenerate client (from repo root)
+```
 
 ## Prerequisites
 
@@ -44,10 +61,13 @@ pnpm dev:pip
 pnpm test:pip
 ```
 
+`pnpm test:run` tries `uv` first, then falls back to `python -m pytest` when `uv` is not installed.
+
 ## Environment
 
 | Variable                    | Default                                          | Description                                         |
 | --------------------------- | ------------------------------------------------ | --------------------------------------------------- |
+| `ENVIRONMENT`               | `dev`                                            | `dev` enables Swagger; `production` / `docker` hide docs |
 | `DATABASE_URL`              | `sqlite:///./wish.db`                            | SQLAlchemy database URL                             |
 | `SECRET_KEY`                | _(dev default)_                                  | Session signing secret (min 32 chars in production) |
 | `ALLOWED_ORIGINS`           | `http://localhost:3000`                          | Comma-separated CORS allowed origins                |
@@ -61,7 +81,7 @@ pnpm test:pip
 | `SMTP_PASSWORD`             | —                                                | SMTP API key / password                             |
 | `SMTP_FROM`                 | —                                                | Sender address on verified domain                   |
 
-Copy `.env.example` to `.env` and fill in Google credentials.
+Copy `.env.example` to `.env` for local development. Production uses committed `apps/backend/.env.prod`; `SMTP_PASSWORD` is injected on deploy from GitHub Actions secrets.
 
 ### Google OAuth setup
 

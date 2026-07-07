@@ -1,20 +1,21 @@
-export type AuthConfig = {
-	google_oauth_enabled: boolean;
-};
+import { type components, createApiClient } from '@wish/api-client';
+
+export type AuthConfig = components['schemas']['AuthConfigResponse'];
 
 export async function fetchAuthConfig(): Promise<AuthConfig> {
 	const apiOrigin = process.env.API_ORIGIN ?? 'http://127.0.0.1:8000';
+	const client = createApiClient(apiOrigin);
 
 	try {
-		const response = await fetch(`${apiOrigin}/api/auth/config`, {
+		const { data, error } = await client.GET('/api/auth/config', {
 			next: { revalidate: 60 },
 		});
 
-		if (!response.ok) {
+		if (error || !data) {
 			return { google_oauth_enabled: false };
 		}
 
-		return (await response.json()) as AuthConfig;
+		return data;
 	} catch {
 		return { google_oauth_enabled: false };
 	}

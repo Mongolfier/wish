@@ -17,6 +17,7 @@ from wish_api.schemas.auth import (
 	UserResponse,
 	VerifyEmailCodeRequest,
 )
+from wish_api.schemas.common import AUTH_ERROR_RESPONSES, EMAIL_CODE_ERROR_RESPONSES
 from wish_api.services.auth import (
 	AuthError,
 	authenticate_user,
@@ -59,13 +60,19 @@ def _auth_response(response: Response, user: User, token: str, settings: Setting
 	return user_to_response(user)
 
 
-@router.post("/register", response_model=UserResponse)
+@router.post(
+	"/register",
+	response_model=UserResponse,
+	summary="Register with email and password",
+	responses=AUTH_ERROR_RESPONSES,
+)
 def register(
 	body: RegisterRequest,
 	response: Response,
 	db: Session = Depends(get_db),
 	settings: Settings = Depends(get_settings_dep),
 ) -> UserResponse:
+	"""Create an account and start a session (sets the `wish_session` cookie)."""
 	try:
 		user = register_user(db, body.email, body.password, body.display_name)
 	except AuthError as error:
@@ -75,12 +82,18 @@ def register(
 	return _auth_response(response, user, token, settings)
 
 
-@router.post("/email/send-code", status_code=204)
+@router.post(
+	"/email/send-code",
+	status_code=204,
+	summary="Send registration verification code",
+	responses=EMAIL_CODE_ERROR_RESPONSES,
+)
 def send_email_code(
 	body: SendEmailCodeRequest,
 	db: Session = Depends(get_db),
 	settings: Settings = Depends(get_settings_dep),
 ) -> Response:
+	"""Send a 6-digit code to the given email. Returns `Retry-After` (seconds until resend)."""
 	try:
 		retry_after_seconds, dev_code = send_registration_code(db, body.email, settings, body.locale)
 	except AuthError as error:
@@ -100,13 +113,19 @@ def send_email_code(
 	return Response(status_code=204, headers=headers)
 
 
-@router.post("/email/verify-register", response_model=UserResponse)
+@router.post(
+	"/email/verify-register",
+	response_model=UserResponse,
+	summary="Verify code and register",
+	responses=EMAIL_CODE_ERROR_RESPONSES,
+)
 def verify_email_register(
 	body: VerifyEmailCodeRequest,
 	response: Response,
 	db: Session = Depends(get_db),
 	settings: Settings = Depends(get_settings_dep),
 ) -> UserResponse:
+	"""Verify the email code, create the account, and start a session."""
 	try:
 		user = verify_registration_code(
 			db, body.email, body.code, body.display_name, body.password, settings
@@ -118,13 +137,19 @@ def verify_email_register(
 	return _auth_response(response, user, token, settings)
 
 
-@router.post("/login", response_model=UserResponse)
+@router.post(
+	"/login",
+	response_model=UserResponse,
+	summary="Login with email and password",
+	responses={401: AUTH_ERROR_RESPONSES[401]},
+)
 def login(
 	body: LoginRequest,
 	response: Response,
 	db: Session = Depends(get_db),
 	settings: Settings = Depends(get_settings_dep),
 ) -> UserResponse:
+	"""Authenticate and start a session (sets the `wish_session` cookie)."""
 	try:
 		user = authenticate_user(db, body.email, body.password)
 	except AuthError as error:
@@ -134,12 +159,13 @@ def login(
 	return _auth_response(response, user, token, settings)
 
 
-@router.post("/logout", status_code=204)
+@router.post("/logout", status_code=204, summary="Logout")
 def logout(
 	request: Request,
 	db: Session = Depends(get_db),
 	settings: Settings = Depends(get_settings_dep),
 ) -> Response:
+	"""Invalidate the current session and clear the session cookie."""
 	token = request.cookies.get(settings.session_cookie_name)
 	delete_session(db, token)
 
@@ -148,24 +174,32 @@ def logout(
 	return response
 
 
-@router.get("/me", response_model=UserResponse)
+@router.get(
+	"/me",
+	response_model=UserResponse,
+	summary="Current user",
+	responses={401: AUTH_ERROR_RESPONSES[401]},
+)
 def me(user: User | None = Depends(get_current_user_optional)) -> UserResponse:
+	"""Return the authenticated user from the session cookie."""
 	if user is None:
 		raise HTTPException(status_code=401, detail="not_authenticated")
 	return user_to_response(user)
 
 
-@router.get("/config", response_model=AuthConfigResponse)
+@router.get("/config", response_model=AuthConfigResponse, summary="Auth feature flags")
 def auth_config(settings: Settings = Depends(get_settings_dep)) -> AuthConfigResponse:
+	"""Public auth configuration for the frontend (e.g. whether Google OAuth is enabled)."""
 	return AuthConfigResponse(google_oauth_enabled=settings.google_oauth_enabled)
 
 
-@router.get("/google")
+@router.get("/google", summary="Start Google OAuth")
 async def google_login(
 	request: Request,
-	locale: str = Query(default="ru"),
+	locale: str = Query(default="ru", description="Frontend locale passed through OAuth state"),
 	settings: Settings = Depends(get_settings_dep),
 ) -> Response:
+	"""Redirect the browser to Google OAuth. Callback: `GET /api/auth/google/callback`."""
 	if not settings.google_oauth_enabled:
 		return RedirectResponse(url=_frontend_auth_url(settings, error="google_oauth_disabled", locale=locale))
 
@@ -177,7 +211,7 @@ async def google_login(
 	)
 
 
-@router.get("/google/callback")
+@router.get("/google/callback", summary="Google OAuth callback", include_in_schema=False)
 async def google_callback(
 	request: Request,
 	db: Session = Depends(get_db),

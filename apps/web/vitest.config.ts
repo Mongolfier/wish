@@ -7,6 +7,7 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@': resolve(__dirname, './src'),
+			'@wish/api-client': resolve(__dirname, '../../packages/api-client/dist'),
 		},
 	},
 	test: {

@@ -33,6 +33,10 @@ jobs:
           docker tag ${{ secrets.REGISTRY }}:5000/wish-storybook:$VERSION ${{ secrets.REGISTRY }}:5000/wish-storybook:latest
           docker push --all-tags ${{ secrets.REGISTRY }}:5000/wish-storybook
 
+          docker build ./apps/backend --file apps/backend/Dockerfile --tag ${{ secrets.REGISTRY }}:5000/wish-api:$VERSION
+          docker tag ${{ secrets.REGISTRY }}:5000/wish-api:$VERSION ${{ secrets.REGISTRY }}:5000/wish-api:latest
+          docker push --all-tags ${{ secrets.REGISTRY }}:5000/wish-api
+
           docker logout ${{ secrets.REGISTRY }}:5000
 
   deploy_to_server:
@@ -48,7 +52,7 @@ jobs:
           username: ${{ secrets.USER }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SERVER_PRIVATE_SSH_KEY }}
-          source: 'docker-compose.yml,.nginx/nginx.conf'
+          source: 'docker-compose.yml,.nginx/nginx.conf,apps/backend/.env.prod'
           target: /app/wish
 
       - name: Pull and run latest images
@@ -60,11 +64,20 @@ jobs:
           key: ${{ secrets.SERVER_PRIVATE_SSH_KEY }}
           envs: DOCKER_REGISTRY
           script: |
+            sudo mkdir -p /etc/docker/certs.d/${{ secrets.REGISTRY }}:5000
+            echo "${{ secrets.CA_CERT }}" | sudo tee /etc/docker/certs.d/${{ secrets.REGISTRY }}:5000/ca.crt > /dev/null
+
             cd /app/wish
+            mkdir -p apps/backend
+            grep -v '^SMTP_PASSWORD=' apps/backend/.env.prod > apps/backend/.env
+            echo "SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}" >> apps/backend/.env
             docker login -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_PASS }} ${{ secrets.REGISTRY }}:5000
             DOCKER_REGISTRY=$DOCKER_REGISTRY docker compose pull
-            DOCKER_REGISTRY=$DOCKER_REGISTRY docker compose up -d
+            DOCKER_REGISTRY=$DOCKER_REGISTRY docker compose up -d --no-build
             docker logout ${{ secrets.REGISTRY }}:5000
+            docker exec wish-nginx nginx -s reload || docker restart wish-nginx
             docker exec wish-storybook nginx -s reload
+            docker compose ps
+            docker compose logs --tail=30 api db || true
         env:
           DOCKER_REGISTRY: ${{ secrets.REGISTRY }}:5000
