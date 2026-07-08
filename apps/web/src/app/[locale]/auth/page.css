@@ -48,7 +48,17 @@
 }
 
 .authField input:focus {
-	border-color: #646cff;
+	border-color: #197deb;
+}
+
+.authField input:focus-visible {
+	border-color: #197deb;
+	outline: 2px solid #197deb;
+	outline-offset: 2px;
+}
+
+.authField input:focus:not(:focus-visible) {
+	outline: none;
 }
 
 .authError {
@@ -82,14 +92,21 @@
 	padding: 0;
 	font-family: inherit;
 	font-size: 0.875rem;
-	color: #646cff;
+	color: #155cc6;
 	cursor: pointer;
 	background: none;
 	border: none;
+	border-radius: 4px;
 }
 
 .authBackLink:hover {
+	color: #1370d7;
 	text-decoration: underline;
+}
+
+.authBackLink:focus-visible {
+	outline: 2px solid #155cc6;
+	outline-offset: 2px;
 }
 
 .authDivider {
@@ -138,12 +155,14 @@
 }
 
 .authSwitch a {
-	color: #646cff;
-	text-decoration: none;
+	font-weight: 600;
+	color: #155cc6;
+	text-decoration: underline;
+	text-underline-offset: 3px;
 }
 
 .authSwitch a:hover {
-	text-decoration: underline;
+	color: #1370d7;
 }
 
 @media (prefers-color-scheme: light) {

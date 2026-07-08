@@ -65,6 +65,7 @@ export function LoginForm({ errorCode }: Readonly<LoginFormProps>) {
 						placeholder="you@example.com"
 						required
 						autoComplete="email"
+						aria-invalid={error ? true : undefined}
 					/>
 				</label>
 
@@ -77,12 +78,14 @@ export function LoginForm({ errorCode }: Readonly<LoginFormProps>) {
 						placeholder="••••••••"
 						required
 						autoComplete="current-password"
+						aria-invalid={error ? true : undefined}
 					/>
 				</label>
 
 				<Button
 					type="submit"
 					disabled={submitting}
+					isLoading={submitting}
 				>
 					{t('submitLogin')}
 				</Button>

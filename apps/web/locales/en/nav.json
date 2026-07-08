@@ -1,5 +1,6 @@
 {
 	"home": "Home",
 	"login": "Log in",
-	"logout": "Log out"
+	"logout": "Log out",
+	"language": "Interface language"
 }

@@ -1,22 +1,86 @@
 .container {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: var(--space-m-var_02, 24px);
+	width: 100%;
+}
+
+.group {
 	display: flex;
-	gap: 20px;
+	flex-direction: column;
+	gap: var(--space-s-var_02, 12px);
+	padding: var(--space-m-var_02, 24px);
+	background: var(--colors-app-bg-trans-primary, rgb(255 255 255 / 2%));
+	border: 1px solid var(--colors-app-stroke-third, rgb(255 255 255 / 10%));
+	border-radius: 16px;
+}
+
+.groupTitle {
+	margin: 0;
+	font-size: var(--font-size-base-xs, 12px);
+	font-weight: 600;
+	line-height: var(--font-line_height-s, 16px);
+	color: var(--colors-accent-blue-30, #75b1f3);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
 }
 
 .personList {
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
+	gap: var(--space-m-var_01, 20px);
 	padding: 0;
 	margin: 0;
 	list-style: none;
 }
 
-.links {
+.person {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: var(--space-s-var_01, 8px);
+}
+
+.personName {
+	margin: 0;
+	font-size: var(--font-size-base-m, 16px);
+	font-weight: 600;
+	line-height: var(--font-line_height-m, 24px);
+	color: var(--colors-neutral-white-100, #fff);
+}
+
+.links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-s-var_01, 8px);
 	padding: 0;
 	margin: 0;
 	list-style: none;
+}
+
+.socialLink {
+	width: 40px;
+	height: 40px;
+}
+
+.socialIcon {
+	width: 20px;
+	height: 20px;
+}
+
+@media (width < 1280px) {
+	.container {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (width < 768px) {
+	.container {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (width < 576px) {
+	.group {
+		padding: var(--space-m-var_01, 20px);
+	}
 }

@@ -7,9 +7,21 @@
 	--button-transition-duration: 0.18s;
 
 	/* Primary */
-	--button-primary-bg: linear-gradient(135deg, var(--colors-accent-blue-50, #197deb) 0%, var(--colors-accent-violet-60, #832dff) 100%);
-	--button-primary-bg-hover: linear-gradient(135deg, var(--colors-accent-blue-40, #238cf5) 0%, var(--colors-accent-violet-50, #974dfe) 100%);
-	--button-primary-bg-active: linear-gradient(135deg, var(--colors-accent-blue-60, #1370d7) 0%, var(--colors-accent-violet-70, #700bff) 100%);
+	--button-primary-bg: linear-gradient(
+		135deg,
+		var(--colors-accent-blue-50, #197deb) 0%,
+		var(--colors-accent-violet-60, #832dff) 100%
+	);
+	--button-primary-bg-hover: linear-gradient(
+		135deg,
+		var(--colors-accent-blue-40, #238cf5) 0%,
+		var(--colors-accent-violet-50, #974dfe) 100%
+	);
+	--button-primary-bg-active: linear-gradient(
+		135deg,
+		var(--colors-accent-blue-60, #1370d7) 0%,
+		var(--colors-accent-violet-70, #700bff) 100%
+	);
 	--button-primary-text: var(--colors-neutral-white-100, #fff);
 	--button-primary-shadow: 0 8px 24px rgb(25 125 235 / 28%);
 

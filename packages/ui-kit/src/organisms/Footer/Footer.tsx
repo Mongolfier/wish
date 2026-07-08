@@ -7,6 +7,7 @@ export interface FooterProps extends HTMLAttributes<HTMLElement> {
 	copyrightSlot?: ReactNode;
 	contactsSlot?: ReactNode;
 }
+
 export const Footer: FC<FooterProps & RefAttributes<HTMLElement>> = forwardRef<HTMLElement, FooterProps>(
 	({ className, copyrightSlot, contactsSlot, ...props }, ref) => {
 		return (
@@ -15,12 +16,21 @@ export const Footer: FC<FooterProps & RefAttributes<HTMLElement>> = forwardRef<H
 				className={cn(css.footer, className)}
 				ref={ref}
 			>
-				<div className={css.mainWrapper}>
-					<div className={css.copyrightSlot}>{copyrightSlot}</div>
-					<div className={css.contactsSlot}>{contactsSlot}</div>
+				<div className={css.inner}>
+					{contactsSlot ? <div className={css.contacts}>{contactsSlot}</div> : null}
+					{copyrightSlot ? (
+						<div className={css.bottom}>
+							<div
+								aria-hidden
+								className={css.divider}
+							/>
+							<p className={css.copyright}>{copyrightSlot}</p>
+						</div>
+					) : null}
 				</div>
 			</footer>
 		);
 	},
 );
+
 Footer.displayName = 'Footer';

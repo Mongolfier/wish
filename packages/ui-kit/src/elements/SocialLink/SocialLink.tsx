@@ -16,6 +16,7 @@ export interface SocialLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement>
 export const SocialLink = ({
 	icon,
 	iconClassName,
+	className,
 	target = '_blank',
 	rel = 'noopener noreferrer',
 	...linkProps
@@ -24,7 +25,7 @@ export const SocialLink = ({
 		{...linkProps}
 		target={target}
 		rel={rel}
-		className={css.socialLink}
+		className={cn(css.socialLink, className)}
 	>
 		<Icon
 			{...icon}

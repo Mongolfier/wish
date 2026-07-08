@@ -15,8 +15,16 @@ export const ContactGroup = ({ group }: ContactGroupProps) => {
 	const title = t(group.specialists);
 
 	return (
-		<article aria-labelledby={`${group.specialists}-heading`}>
-			<h2 id={`${group.specialists}-heading`}>{title}</h2>
+		<article
+			aria-labelledby={`${group.specialists}-heading`}
+			className={css.group}
+		>
+			<h2
+				className={css.groupTitle}
+				id={`${group.specialists}-heading`}
+			>
+				{title}
+			</h2>
 
 			<ul className={css.personList}>
 				{group.list.map((person) => (

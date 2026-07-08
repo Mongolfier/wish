@@ -1,21 +1,65 @@
+@import url('../../assets/mixins/responsive.css');
 @import url('./Footer.vars.css');
 
 .footer {
+	position: relative;
 	box-sizing: border-box;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	width: 100%;
-	padding: var(--footer-padding_hor, 40px) var(--footer-padding_vert, 76px);
-	background-color: var(--footer-background, #000);
+	padding: var(--footer-padding-block) var(--footer-padding-inline);
+	background: var(--footer-background);
 }
 
-.mainWrapper {
-	box-sizing: border-box;
+.footer::before {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	height: 2px;
+	content: '';
+	background: var(--footer-border-top);
+}
+
+.inner {
 	display: flex;
-	flex-grow: 1;
-	align-items: center;
-	justify-content: space-between;
+	flex-direction: column;
+	gap: var(--footer-gap);
 	max-width: var(--general-dimension_body-max_width_content, 1768px);
-	color: var(--colors-app-text-secondary, #fff);
+	margin: 0 auto;
+}
+
+.contacts {
+	width: 100%;
+}
+
+.bottom {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-m-var_01, 20px);
+}
+
+.divider {
+	width: 100%;
+	height: 1px;
+	background: var(--colors-app-stroke-third, rgb(255 255 255 / 10%));
+}
+
+.copyright {
+	margin: 0;
+	font-size: var(--footer-copyright-font-size);
+	font-weight: 500;
+	line-height: var(--font-line_height-sm, 20px);
+	color: var(--footer-copyright-color);
+	letter-spacing: 0.01em;
+}
+
+@mixin mobile-screen {
+	.footer {
+		padding: var(--footer-padding-block-mobile) var(--footer-padding-inline-mobile);
+	}
+}
+
+@mixin mobile-small-screen {
+	.copyright {
+		text-align: center;
+	}
 }

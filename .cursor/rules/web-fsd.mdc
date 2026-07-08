@@ -1,0 +1,74 @@
+---
+description: >-
+  FSD architecture for @wish/web — layer boundaries, import rules, and where to
+  put new UI, features, and pages in apps/web/src.
+globs: apps/web/**/*
+alwaysApply: false
+---
+
+# FSD in @wish/web
+
+When editing `apps/web`, follow Feature-Sliced Design (adapted). Full guide: `.cursor/skills/fsd-web-feature/SKILL.md`.
+
+## Layers
+
+```
+apps/web/src/
+├── app/[locale]/     # Routes only — thin page.tsx, layouts, route CSS
+├── core/
+│   ├── app/          # Shell: MainLayout, Providers, RootBody
+│   ├── widgets/      # Composite blocks: Header, Footer
+│   ├── features/     # User actions: auth, languageSelector
+│   └── shared/       # Cross-cutting: router, utils (no UI features)
+└── i18n/             # next-intl config (not an FSD layer)
+```
+
+## Import direction (strict)
+
+| From | May import |
+| ---- | ---------- |
+| `app/` | `core/*`, `@wish/ui-kit`, `@/i18n/*` |
+| `widgets/` | `features/`, `shared/`, `@wish/ui-kit` |
+| `features/` | `shared/`, `@wish/ui-kit` |
+| `shared/` | external libs only |
+
+**Forbidden:** `features/` → `widgets/`; `shared/` → `features/` or `widgets/`; `core/*` → `app/`; `@wish/ui-kit` → anything from `apps/web`.
+
+## Where to add code
+
+- **New user flow / action** → `core/features/<name>/` with `index.ts` public API (`hooks/`, `ui/`, `api/`, `context/` as needed)
+- **Large composed block** (header, footer) → `core/widgets/<name>/`
+- **New route** → `app/[locale]/.../page.tsx` — delegate UI to `core/features` or `core/widgets`; use `(main-layout)` when header/footer needed
+- **Reusable primitive** → `@wish/ui-kit`, not copied into web
+- **Do not** add new code under legacy `src/components/` — use `core/features` or `core/widgets`
+
+## Conventions
+
+- Navigation: `@/i18n/navigation` (`Link`, `useRouter`) — not `next/link` / `next/navigation` directly
+- Route constants: extend `core/shared/router/routes.ts`
+- `'use client'` only where hooks/events are needed; keep pages server when possible
+- App-specific styles: `*.module.css` in `core/`; route CSS next to `page.tsx`; do not duplicate ui-kit component styles
+- Strings: next-intl locale files — no hardcoded user-visible copy in components
+
+## Examples
+
+```tsx
+// ✅ app/[locale]/auth/page.tsx — thin page
+import { LoginForm } from '@/core/features/auth';
+
+export default function AuthPage() {
+  return <LoginForm />;
+}
+
+// ❌ feature importing a widget
+import { Header } from '@/core/widgets/header/Header';
+
+// ❌ business logic + markup directly in page.tsx (belongs in core/features)
+```
+
+## Verify after changes
+
+```bash
+pnpm --filter @wish/web lint
+pnpm --filter @wish/web test:run
+```

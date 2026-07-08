@@ -1,6 +1,17 @@
 /* cssmodules-pure-no-check */
 :root {
 	--footer-background: var(--colors-neutral-dark-100, #0b1016);
-	--footer-padding_hor: var(--size-base-l-var_01);
-	--footer-padding_vert: var(--general-dimension_body-padding-vert);
+	--footer-border-top: linear-gradient(
+		90deg,
+		var(--colors-accent-blue-50, #197deb) 0%,
+		var(--colors-accent-violet-60, #832dff) 50%,
+		var(--colors-accent-blue-40, #238cf5) 100%
+	);
+	--footer-padding-block: var(--space-xl-var_01, 48px);
+	--footer-padding-inline: var(--general-dimension_body-padding-vert, 76px);
+	--footer-padding-block-mobile: var(--space-l-var_02, 32px);
+	--footer-padding-inline-mobile: var(--space-m-var_02, 24px);
+	--footer-gap: var(--space-l-var_02, 32px);
+	--footer-copyright-color: var(--colors-neutral-gray-60, #878b8f);
+	--footer-copyright-font-size: var(--font-size-base-s, 14px);
 }

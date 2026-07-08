@@ -10,14 +10,17 @@ export const contactsConfig: FooterConfig[] = [
 					{
 						icon: { category: 'logo', name: 'github' },
 						href: 'https://github.com/Mongolfier',
+						labelKey: 'github',
 					},
 					{
 						icon: { category: 'logo', name: 'telegram' },
 						href: 'https://t.me/DmitryMumrenkov',
+						labelKey: 'telegram',
 					},
 					{
 						icon: { category: 'information', name: 'email-outline' },
 						href: 'mailto:dmitrymumrenkov@gmail.com',
+						labelKey: 'email',
 					},
 				],
 			},
@@ -32,14 +35,17 @@ export const contactsConfig: FooterConfig[] = [
 					{
 						icon: { category: 'logo', name: 'github' },
 						href: 'https://github.com/Learningsome',
+						labelKey: 'github',
 					},
 					{
 						icon: { category: 'logo', name: 'telegram' },
 						href: 'https://t.me/melting_sun',
+						labelKey: 'telegram',
 					},
 					{
 						icon: { category: 'information', name: 'email-outline' },
 						href: 'mailto:nikolajkashirskij@gmail.com',
+						labelKey: 'email',
 					},
 				],
 			},
@@ -54,10 +60,12 @@ export const contactsConfig: FooterConfig[] = [
 					{
 						icon: { category: 'logo', name: 'github' },
 						href: 'TBD',
+						labelKey: 'github',
 					},
 					{
 						icon: { category: 'logo', name: 'telegram' },
 						href: 'https://t.me/ataraxii_dev',
+						labelKey: 'telegram',
 					},
 				],
 			},

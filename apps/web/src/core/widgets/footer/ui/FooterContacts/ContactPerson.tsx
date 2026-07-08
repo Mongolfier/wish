@@ -14,16 +14,19 @@ export const ContactPerson = ({ person }: ContactPersonProps) => {
 	const displayName = t(`names.${person.name}`);
 
 	return (
-		<li>
-			<h3>{displayName}</h3>
+		<li className={css.person}>
+			<h3 className={css.personName}>{displayName}</h3>
 
-			<nav aria-label={`${displayName} contacts`}>
+			<nav aria-label={t('contactsNav', { name: displayName })}>
 				<ul className={css.links}>
 					{person.links.map((link) => (
-						<li key={link.href}>
+						<li key={`${link.labelKey}-${link.href}`}>
 							<SocialLink
-								icon={link.icon}
+								aria-label={t(`social.${link.labelKey}`)}
+								className={css.socialLink}
 								href={link.href}
+								icon={link.icon}
+								iconClassName={css.socialIcon}
 							/>
 						</li>
 					))}

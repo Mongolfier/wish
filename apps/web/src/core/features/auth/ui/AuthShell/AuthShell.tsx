@@ -10,9 +10,15 @@ export function AuthShell({ children, error }: AuthShellProps) {
 	return (
 		<div className="authPage">
 			<div className="authForm">
+				{error ? (
+					<p
+						className="authError"
+						role="alert"
+					>
+						{error}
+					</p>
+				) : null}
 				{children}
-
-				{error ? <p className="authError">{error}</p> : null}
 			</div>
 		</div>
 	);

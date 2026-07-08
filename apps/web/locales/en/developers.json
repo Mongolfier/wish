@@ -8,5 +8,11 @@
 		"developers": "Developers",
 		"devops": "DevOps",
 		"designers": "Designers"
-	}
+	},
+	"social": {
+		"github": "GitHub",
+		"telegram": "Telegram",
+		"email": "Email"
+	},
+	"contactsNav": "{name} contacts"
 }
