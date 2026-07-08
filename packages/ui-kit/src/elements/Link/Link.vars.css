@@ -1,0 +1,19 @@
+:root {
+	--link-font-family: var(--font-family-body, montserrat, sans-serif);
+	--link-font-weight: 500;
+	--link-font-weight-accent: 600;
+	--link-border-radius: 4px;
+	--link-transition-duration: 0.15s;
+	--link-default-text: var(--colors-neutral-dark-100, #0b1016);
+	--link-default-text-hover: var(--colors-neutral-gray-70, #575c62);
+	--link-accent-text: var(--colors-accent-blue-50, #197deb);
+	--link-accent-text-hover: var(--colors-accent-blue-40, #238cf5);
+	--link-accent-text-active: var(--colors-accent-blue-60, #1370d7);
+	--link-muted-text: var(--colors-neutral-gray-70, #575c62);
+	--link-muted-text-hover: var(--colors-neutral-gray-75, #373b41);
+	--link-inverse-text: var(--colors-neutral-white-100, #fff);
+	--link-inverse-text-hover: var(--colors-accent-blue-30, #75b1f3);
+	--link-disabled-text: var(--colors-neutral-gray-60, #878b8f);
+	--link-focus-outline: var(--colors-accent-blue-40, #238cf5);
+	--link-underline-offset: 3px;
+}

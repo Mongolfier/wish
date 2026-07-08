@@ -1,1 +1,226 @@
-/* Button component styles */
+@import url('../../assets/mixins/transition.css');
+@import url('./Button.vars.css');
+
+.button {
+	position: relative;
+	display: inline-flex;
+	flex-shrink: 0;
+	gap: var(--button-gap);
+	align-items: center;
+	justify-content: center;
+	max-width: 100%;
+	padding: 0 var(--button-padding-x-small);
+	font-family: var(--button-font-family);
+	font-weight: var(--button-font-weight);
+	line-height: 1;
+	color: inherit;
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
+	user-select: none;
+	border: var(--button-border-width) solid transparent;
+	border-radius: var(--button-border-radius);
+	outline: none;
+
+	@mixin transition all, var(--button-transition-duration);
+
+	&:disabled {
+		cursor: not-allowed;
+		box-shadow: none;
+		opacity: var(--button-disabled-opacity);
+		transform: none;
+	}
+}
+
+.button:focus-visible {
+	outline: 2px solid var(--button-focus-outline);
+	outline-offset: 2px;
+}
+
+.button_fullWidth {
+	width: 100%;
+}
+
+/* Sizes */
+
+.button_small {
+	min-height: var(--button-height-small);
+	padding-inline: var(--button-padding-x-small);
+	font-size: var(--button-font-size-small);
+}
+
+.button_medium {
+	min-height: var(--button-height-medium);
+	padding-inline: var(--button-padding-x-medium);
+	font-size: var(--button-font-size-medium);
+}
+
+.button_large {
+	min-height: var(--button-height-large);
+	padding-inline: var(--button-padding-x-large);
+	font-size: var(--button-font-size-large);
+}
+
+.button_small .icon {
+	width: var(--button-icon-size-small);
+	height: var(--button-icon-size-small);
+}
+
+.button_medium .icon {
+	width: var(--button-icon-size-medium);
+	height: var(--button-icon-size-medium);
+}
+
+.button_large .icon {
+	width: var(--button-icon-size-large);
+	height: var(--button-icon-size-large);
+}
+
+/* Modes */
+
+.button_primary {
+	color: var(--button-primary-text);
+	background: var(--button-primary-bg);
+	box-shadow: var(--button-primary-shadow);
+}
+
+.button_primary:not(:disabled) {
+	@media (hover: hover) {
+		&:hover {
+			background: var(--button-primary-bg-hover);
+			box-shadow: 0 10px 28px rgb(25 125 235 / 34%);
+			transform: translateY(-1px);
+		}
+	}
+
+	&:active {
+		background: var(--button-primary-bg-active);
+		box-shadow: 0 4px 14px rgb(25 125 235 / 22%);
+		transform: translateY(0);
+	}
+}
+
+.button_secondary {
+	color: var(--button-secondary-text);
+	background: var(--button-secondary-bg);
+	border-color: var(--button-secondary-border);
+}
+
+.button_secondary:not(:disabled) {
+	@media (hover: hover) {
+		&:hover {
+			background: var(--button-secondary-bg-hover);
+			border-color: var(--button-secondary-border-hover);
+		}
+	}
+
+	&:active {
+		background: var(--button-secondary-bg-active);
+	}
+}
+
+.button_third {
+	color: var(--button-tertiary-text);
+	background: var(--button-tertiary-bg);
+}
+
+.button_third:not(:disabled) {
+	@media (hover: hover) {
+		&:hover {
+			color: var(--button-tertiary-text-hover);
+			background: var(--button-tertiary-bg-hover);
+		}
+	}
+
+	&:active {
+		background: var(--button-tertiary-bg-active);
+	}
+}
+
+.button_fourth {
+	color: var(--button-quaternary-text);
+	background: var(--button-quaternary-bg);
+	border-color: var(--button-quaternary-border);
+}
+
+.button_fourth:not(:disabled) {
+	@media (hover: hover) {
+		&:hover {
+			background: var(--button-quaternary-bg-hover);
+		}
+	}
+
+	&:active {
+		background: var(--button-quaternary-bg-active);
+	}
+}
+
+/* Icon alignment */
+
+.iconAlignPrefix {
+	flex-direction: row;
+}
+
+.iconAlignSuffix {
+	flex-direction: row-reverse;
+}
+
+.text {
+	display: inline-flex;
+	align-items: center;
+}
+
+.icon {
+	flex-shrink: 0;
+}
+
+/* Circle */
+
+.button_circle {
+	width: var(--button-height-small);
+	padding: 0;
+	border-radius: 50%;
+}
+
+.button_circle.button_medium {
+	width: var(--button-height-medium);
+}
+
+.button_circle.button_large {
+	width: var(--button-height-large);
+}
+
+/* Loading */
+
+.button_loading {
+	pointer-events: none;
+}
+
+.button_loading .text,
+.button_loading .icon {
+	visibility: hidden;
+}
+
+.spinner {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.spinner::after {
+	width: 1.15em;
+	height: 1.15em;
+	content: '';
+	border: 2px solid currentColor;
+	border-top-color: transparent;
+	border-radius: 50%;
+	animation: button-spin 0.65s linear infinite;
+}
+
+@keyframes button-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
