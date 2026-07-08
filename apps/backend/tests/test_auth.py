@@ -57,11 +57,37 @@ def test_me_unauthenticated(client):
 	assert response.json()["detail"] == "not_authenticated"
 
 
-def test_google_oauth_disabled(client):
-	config = client.get("/api/auth/config")
-	assert config.status_code == 200
-	assert config.json()["google_oauth_enabled"] is False
+def test_register_disabled_when_direct_register_off(client, settings):
+	settings.direct_register_enabled = False
 
-	response = client.get("/api/auth/google", follow_redirects=False)
-	assert response.status_code == 307
-	assert "error=google_oauth_disabled" in response.headers["location"]
+	response = client.post(
+		"/api/auth/register",
+		json={"email": "blocked@example.com", "password": "password123"},
+	)
+
+	assert response.status_code == 403
+	assert response.json()["detail"] == "registration_disabled"
+
+
+def test_login_rate_limited(client):
+	from wish_api.services.rate_limit import rate_limiter
+
+	rate_limiter.reset()
+	headers = {"X-Forwarded-For": "203.0.113.99"}
+
+	for _ in range(10):
+		response = client.post(
+			"/api/auth/login",
+			json={"email": "missing@example.com", "password": "wrong-password"},
+			headers=headers,
+		)
+		assert response.status_code == 401
+
+	limited = client.post(
+		"/api/auth/login",
+		json={"email": "missing@example.com", "password": "wrong-password"},
+		headers=headers,
+	)
+	assert limited.status_code == 429
+	assert limited.json()["detail"] == "rate_limited"
+	assert limited.headers.get("Retry-After") is not None

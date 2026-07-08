@@ -9,17 +9,13 @@ from wish_api.db.base import Base
 from wish_api.db.session import get_db
 from wish_api.dependencies.auth import get_settings_dep
 from wish_api.main import app
-from wish_api.services.oauth import configure_oauth
 
 
 @pytest.fixture
 def settings() -> Settings:
 	return Settings(
 		database_url="sqlite://",
-		secret_key="test-secret-key-for-session-middleware-32",
 		cookie_secure=False,
-		google_client_id="",
-		google_client_secret="",
 		smtp_dev_log_codes=True,
 	)
 
@@ -46,7 +42,6 @@ def client(settings: Settings):
 
 	app.dependency_overrides[get_db] = override_get_db
 	app.dependency_overrides[get_settings_dep] = override_get_settings
-	configure_oauth(settings)
 
 	with TestClient(app) as test_client:
 		yield test_client

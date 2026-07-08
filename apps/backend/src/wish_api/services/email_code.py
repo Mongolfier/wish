@@ -63,7 +63,11 @@ def send_registration_code(
 ) -> tuple[int, str | None]:
 	normalized_email = _normalize_email(email)
 
-	ensure_email_available_for_registration(db, normalized_email)
+	try:
+		ensure_email_available_for_registration(db, normalized_email)
+	except AuthError:
+		# Do not reveal whether the email is already registered.
+		return settings.email_code_resend_seconds, None
 
 	latest_code = db.scalar(
 		select(EmailVerificationCode)
@@ -105,7 +109,7 @@ def send_registration_code(
 	try:
 		send_email(to=normalized_email, subject=subject, body=body, settings=settings)
 	except EmailDeliveryError as error:
-		if settings.smtp_dev_log_codes:
+		if settings.smtp_dev_log_codes and not settings.is_production:
 			logger.warning(
 				"SMTP unavailable (%s) — dev registration code for %s: %s",
 				error,

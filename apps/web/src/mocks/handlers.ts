@@ -8,10 +8,6 @@ export const handlers = [
 		return HttpResponse.json({ status: 'ok' });
 	}),
 
-	http.get('/api/auth/config', () => {
-		return HttpResponse.json({ google_oauth_enabled: true });
-	}),
-
 	http.get('/api/auth/me', ({ cookies }) => {
 		const sessionUserId = cookies.wish_session;
 

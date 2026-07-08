@@ -1,7 +1,4 @@
-from urllib.parse import urlencode
-
-from fastapi import APIRouter, Depends, HTTPException, Query, Request
-from fastapi.responses import RedirectResponse
+from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 from starlette.responses import Response
 
@@ -10,7 +7,6 @@ from wish_api.db.session import get_db
 from wish_api.dependencies.auth import get_current_user_optional, get_settings_dep
 from wish_api.models.user import User
 from wish_api.schemas.auth import (
-	AuthConfigResponse,
 	LoginRequest,
 	RegisterRequest,
 	SendEmailCodeRequest,
@@ -18,17 +14,17 @@ from wish_api.schemas.auth import (
 	VerifyEmailCodeRequest,
 )
 from wish_api.schemas.common import AUTH_ERROR_RESPONSES, EMAIL_CODE_ERROR_RESPONSES
+from wish_api.security.request import get_client_ip, require_allowed_origin
 from wish_api.services.auth import (
 	AuthError,
 	authenticate_user,
 	create_session,
 	delete_session,
-	get_or_create_google_user,
 	register_user,
 	user_to_response,
 )
 from wish_api.services.email_code import send_registration_code, verify_registration_code
-from wish_api.services.oauth import configure_oauth, oauth
+from wish_api.services.rate_limit import rate_limiter
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -60,6 +56,36 @@ def _auth_response(response: Response, user: User, token: str, settings: Setting
 	return user_to_response(user)
 
 
+def _enforce_login_rate_limit(request: Request, settings: Settings) -> None:
+	client_ip = get_client_ip(request)
+	retry_after = rate_limiter.check(
+		f"login:ip:{client_ip}",
+		settings.login_rate_limit_attempts,
+		settings.login_rate_limit_window_seconds,
+	)
+	if retry_after is not None:
+		raise HTTPException(
+			status_code=429,
+			detail="rate_limited",
+			headers={"Retry-After": str(retry_after)},
+		)
+
+
+def _enforce_send_code_ip_rate_limit(request: Request, settings: Settings) -> None:
+	client_ip = get_client_ip(request)
+	retry_after = rate_limiter.check(
+		f"send-code:ip:{client_ip}",
+		settings.send_code_ip_rate_limit_attempts,
+		settings.send_code_ip_rate_limit_window_seconds,
+	)
+	if retry_after is not None:
+		raise HTTPException(
+			status_code=429,
+			detail="code_rate_limited",
+			headers={"Retry-After": str(retry_after)},
+		)
+
+
 @router.post(
 	"/register",
 	response_model=UserResponse,
@@ -68,11 +94,17 @@ def _auth_response(response: Response, user: User, token: str, settings: Setting
 )
 def register(
 	body: RegisterRequest,
+	request: Request,
 	response: Response,
 	db: Session = Depends(get_db),
 	settings: Settings = Depends(get_settings_dep),
 ) -> UserResponse:
 	"""Create an account and start a session (sets the `wish_session` cookie)."""
+	if not settings.direct_register_enabled:
+		raise HTTPException(status_code=403, detail="registration_disabled")
+
+	require_allowed_origin(request, settings)
+
 	try:
 		user = register_user(db, body.email, body.password, body.display_name)
 	except AuthError as error:
@@ -90,10 +122,14 @@ def register(
 )
 def send_email_code(
 	body: SendEmailCodeRequest,
+	request: Request,
 	db: Session = Depends(get_db),
 	settings: Settings = Depends(get_settings_dep),
 ) -> Response:
 	"""Send a 6-digit code to the given email. Returns `Retry-After` (seconds until resend)."""
+	require_allowed_origin(request, settings)
+	_enforce_send_code_ip_rate_limit(request, settings)
+
 	try:
 		retry_after_seconds, dev_code = send_registration_code(db, body.email, settings, body.locale)
 	except AuthError as error:
@@ -121,11 +157,14 @@ def send_email_code(
 )
 def verify_email_register(
 	body: VerifyEmailCodeRequest,
+	request: Request,
 	response: Response,
 	db: Session = Depends(get_db),
 	settings: Settings = Depends(get_settings_dep),
 ) -> UserResponse:
 	"""Verify the email code, create the account, and start a session."""
+	require_allowed_origin(request, settings)
+
 	try:
 		user = verify_registration_code(
 			db, body.email, body.code, body.display_name, body.password, settings
@@ -145,11 +184,15 @@ def verify_email_register(
 )
 def login(
 	body: LoginRequest,
+	request: Request,
 	response: Response,
 	db: Session = Depends(get_db),
 	settings: Settings = Depends(get_settings_dep),
 ) -> UserResponse:
 	"""Authenticate and start a session (sets the `wish_session` cookie)."""
+	require_allowed_origin(request, settings)
+	_enforce_login_rate_limit(request, settings)
+
 	try:
 		user = authenticate_user(db, body.email, body.password)
 	except AuthError as error:
@@ -166,6 +209,8 @@ def logout(
 	settings: Settings = Depends(get_settings_dep),
 ) -> Response:
 	"""Invalidate the current session and clear the session cookie."""
+	require_allowed_origin(request, settings)
+
 	token = request.cookies.get(settings.session_cookie_name)
 	delete_session(db, token)
 
@@ -185,74 +230,3 @@ def me(user: User | None = Depends(get_current_user_optional)) -> UserResponse:
 	if user is None:
 		raise HTTPException(status_code=401, detail="not_authenticated")
 	return user_to_response(user)
-
-
-@router.get("/config", response_model=AuthConfigResponse, summary="Auth feature flags")
-def auth_config(settings: Settings = Depends(get_settings_dep)) -> AuthConfigResponse:
-	"""Public auth configuration for the frontend (e.g. whether Google OAuth is enabled)."""
-	return AuthConfigResponse(google_oauth_enabled=settings.google_oauth_enabled)
-
-
-@router.get("/google", summary="Start Google OAuth")
-async def google_login(
-	request: Request,
-	locale: str = Query(default="ru", description="Frontend locale passed through OAuth state"),
-	settings: Settings = Depends(get_settings_dep),
-) -> Response:
-	"""Redirect the browser to Google OAuth. Callback: `GET /api/auth/google/callback`."""
-	if not settings.google_oauth_enabled:
-		return RedirectResponse(url=_frontend_auth_url(settings, error="google_oauth_disabled", locale=locale))
-
-	configure_oauth(settings)
-	return await oauth.google.authorize_redirect(
-		request,
-		settings.resolved_google_oauth_redirect_uri,
-		state=locale,
-	)
-
-
-@router.get("/google/callback", summary="Google OAuth callback", include_in_schema=False)
-async def google_callback(
-	request: Request,
-	db: Session = Depends(get_db),
-	settings: Settings = Depends(get_settings_dep),
-) -> Response:
-	if not settings.google_oauth_enabled:
-		return RedirectResponse(url=_frontend_auth_url(settings, error="google_oauth_disabled"))
-
-	configure_oauth(settings)
-
-	try:
-		token = await oauth.google.authorize_access_token(request)
-	except Exception:
-		return RedirectResponse(url=_frontend_auth_url(settings, error="oauth_failed"))
-
-	user_info = token.get("userinfo")
-	if not user_info:
-		return RedirectResponse(url=_frontend_auth_url(settings, error="oauth_failed"))
-
-	google_id = user_info.get("sub")
-	if not google_id:
-		return RedirectResponse(url=_frontend_auth_url(settings, error="oauth_failed"))
-
-	user = get_or_create_google_user(
-		db,
-		google_id=google_id,
-		email=user_info.get("email"),
-		display_name=user_info.get("name"),
-		avatar_url=user_info.get("picture"),
-	)
-
-	session_token = create_session(db, user, settings)
-	locale = request.query_params.get("state") or settings.frontend_default_locale
-	redirect_url = f"{settings.oauth_redirect_base.rstrip('/')}/{locale}"
-
-	response = RedirectResponse(url=redirect_url, status_code=302)
-	_set_session_cookie(response, session_token, settings)
-	return response
-
-
-def _frontend_auth_url(settings: Settings, *, error: str, locale: str | None = None) -> str:
-	locale = locale or settings.frontend_default_locale
-	query = urlencode({"error": error})
-	return f"{settings.oauth_redirect_base.rstrip('/')}/{locale}/auth?{query}"

@@ -29,6 +29,7 @@ def test_swagger_ui_in_dev():
 
 def test_docs_disabled_in_production(monkeypatch):
 	monkeypatch.setenv("ENVIRONMENT", "production")
+	monkeypatch.setenv("DATABASE_URL", "postgresql+psycopg://user:pass@db:5432/wish")
 	get_settings.cache_clear()
 
 	production_app = create_app()

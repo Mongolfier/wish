@@ -6,7 +6,7 @@ OPENAPI_TAGS = [
 	{
 		"name": "auth",
 		"description": (
-			"Registration, login, session cookies (`wish_session`), email verification, and Google OAuth."
+			"Registration, login, session cookies (`wish_session`), and email verification."
 		),
 	},
 ]

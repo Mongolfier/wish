@@ -20,8 +20,8 @@ import { browserApiClient, createApiClient, type components } from '@wish/api-cl
 type User = components['schemas']['UserResponse'];
 
 const { data, error, response } = await browserApiClient.POST('/api/auth/login', {
-  credentials: 'include',
-  body: { email, password },
+	credentials: 'include',
+	body: { email, password },
 });
 ```
 

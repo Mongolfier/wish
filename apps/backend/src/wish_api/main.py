@@ -6,25 +6,23 @@ from fastapi.exceptions import ResponseValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from sqlalchemy.exc import IntegrityError, OperationalError
-from starlette.middleware.sessions import SessionMiddleware
 
-from wish_api.config import get_settings
+from wish_api.config import get_settings, validate_settings
 from wish_api.db.base import Base
 from wish_api.db.session import engine
 from wish_api.openapi import API_DESCRIPTION, OPENAPI_TAGS
 from wish_api.routers import auth, health
-from wish_api.services.oauth import configure_oauth
 
 logger = logging.getLogger(__name__)
 
 
 def create_app() -> FastAPI:
 	settings = get_settings()
+	validate_settings(settings)
 
 	@asynccontextmanager
 	async def lifespan(_app: FastAPI):
 		Base.metadata.create_all(bind=engine)
-		configure_oauth(settings)
 		yield
 
 	docs_url = "/docs" if settings.docs_enabled else None
@@ -64,13 +62,6 @@ def create_app() -> FastAPI:
 	async def unhandled_error_handler(_request: Request, exc: Exception) -> JSONResponse:
 		logger.exception("Unhandled error")
 		return JSONResponse(status_code=500, content={"detail": "internal_error"})
-
-	application.add_middleware(
-		SessionMiddleware,
-		secret_key=settings.secret_key,
-		https_only=settings.cookie_secure,
-		same_site=settings.cookie_samesite,
-	)
 
 	application.add_middleware(
 		CORSMiddleware,

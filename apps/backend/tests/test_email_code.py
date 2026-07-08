@@ -50,13 +50,15 @@ def test_send_and_verify_registration_code(db_session, settings):
 	assert user.password_hash is not None
 
 
-def test_send_code_rejects_existing_email(db_session, settings):
+def test_send_code_hides_existing_email(db_session, settings):
 	register_user(db_session, "taken@example.com", "password123", "Taken")
 
-	with pytest.raises(AuthError) as error:
-		send_registration_code(db_session, "taken@example.com", settings)
+	with patch("wish_api.services.email_code.send_email") as send_email_mock:
+		retry_after, dev_code = send_registration_code(db_session, "taken@example.com", settings)
 
-	assert error.value.code == "email_taken"
+	assert retry_after == settings.email_code_resend_seconds
+	assert dev_code is None
+	send_email_mock.assert_not_called()
 
 
 def test_verify_recovers_orphaned_email_identity(db_session, settings):

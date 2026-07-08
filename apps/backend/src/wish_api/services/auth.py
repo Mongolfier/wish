@@ -14,7 +14,6 @@ from wish_api.models.user import User, UserIdentity
 from wish_api.schemas.auth import UserResponse
 
 EMAIL_PROVIDER = "email"
-GOOGLE_PROVIDER = "google"
 
 
 class AuthError(Exception):
@@ -195,56 +194,3 @@ def get_user_by_session_token(db: Session, token: str | None) -> User | None:
 
 	return session.user
 
-
-def get_or_create_google_user(
-	db: Session,
-	*,
-	google_id: str,
-	email: str | None,
-	display_name: str | None,
-	avatar_url: str | None,
-) -> User:
-	identity = db.scalar(
-		select(UserIdentity).where(
-			UserIdentity.provider == GOOGLE_PROVIDER,
-			UserIdentity.provider_id == google_id,
-		)
-	)
-	if identity is not None:
-		user = identity.user
-		if avatar_url and user.avatar_url != avatar_url:
-			user.avatar_url = avatar_url
-			db.commit()
-			db.refresh(user)
-		return user
-
-	normalized_email = email.lower() if email else None
-	user: User | None = None
-
-	if normalized_email:
-		user = db.scalar(select(User).where(User.email == normalized_email))
-
-	if user is None:
-		user = User(
-			email=normalized_email,
-			display_name=display_name or normalized_email or "User",
-			avatar_url=avatar_url,
-		)
-		db.add(user)
-		db.flush()
-	else:
-		if display_name and not user.display_name:
-			user.display_name = display_name
-		if avatar_url and not user.avatar_url:
-			user.avatar_url = avatar_url
-
-	db.add(
-		UserIdentity(
-			user_id=user.id,
-			provider=GOOGLE_PROVIDER,
-			provider_id=google_id,
-		)
-	)
-	db.commit()
-	db.refresh(user)
-	return user

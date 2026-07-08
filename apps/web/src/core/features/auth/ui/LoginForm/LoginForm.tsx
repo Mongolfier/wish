@@ -12,16 +12,9 @@ import { AuthShell } from '../AuthShell/AuthShell';
 
 type LoginFormProps = {
 	errorCode?: string;
-	googleOAuthEnabled?: boolean;
 };
 
-const AUTH_ERROR_CODES = [
-	'email_taken',
-	'invalid_credentials',
-	'oauth_failed',
-	'google_oauth_disabled',
-	'unknown',
-] as const;
+const AUTH_ERROR_CODES = ['email_taken', 'invalid_credentials', 'unknown'] as const;
 
 function resolveAuthError(t: ReturnType<typeof useTranslations<'auth'>>, code: string) {
 	if ((AUTH_ERROR_CODES as readonly string[]).includes(code)) {
@@ -31,7 +24,7 @@ function resolveAuthError(t: ReturnType<typeof useTranslations<'auth'>>, code: s
 	return t('errors.unknown');
 }
 
-export function LoginForm({ errorCode, googleOAuthEnabled = false }: Readonly<LoginFormProps>) {
+export function LoginForm({ errorCode }: Readonly<LoginFormProps>) {
 	const router = useRouter();
 	const t = useTranslations('auth');
 	const { refresh } = useAuth();
@@ -59,10 +52,7 @@ export function LoginForm({ errorCode, googleOAuthEnabled = false }: Readonly<Lo
 	};
 
 	return (
-		<AuthShell
-			error={error}
-			googleOAuthEnabled={googleOAuthEnabled}
-		>
+		<AuthShell error={error}>
 			<form onSubmit={handleSubmit}>
 				<h1>{t('loginTitle')}</h1>
 

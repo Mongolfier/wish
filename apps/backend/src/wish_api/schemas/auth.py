@@ -40,7 +40,3 @@ class UserResponse(BaseModel):
 	avatar_url: str | None = Field(description="Profile image URL")
 
 	model_config = {"from_attributes": True}
-
-
-class AuthConfigResponse(BaseModel):
-	google_oauth_enabled: bool = Field(description="Whether Google OAuth login is configured")

@@ -5,7 +5,37 @@ on:
     branches: ['main']
 
 jobs:
+  npm_audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm audit --audit-level=high
+
+  python_audit:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+
+      - run: uv sync --extra dev
+      - run: uv pip install pip-audit
+      - run: uv run pip-audit
+
   build_and_push_images:
+    needs: [npm_audit, python_audit]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -69,14 +99,25 @@ jobs:
 
             cd /app/wish
             mkdir -p apps/backend
-            grep -v '^SMTP_PASSWORD=' apps/backend/.env.prod > apps/backend/.env
-            echo "SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}" >> apps/backend/.env
+
+            {
+              echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}"
+              echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}"
+              echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}"
+            } > .env
+
+            grep -vE '^(DATABASE_URL|SMTP_PASSWORD)=' apps/backend/.env.prod > apps/backend/.env
+            {
+              echo "SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}"
+              echo "DATABASE_URL=postgresql+psycopg://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@db:5432/${{ secrets.POSTGRES_DB }}"
+            } >> apps/backend/.env
+
             docker login -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_PASS }} ${{ secrets.REGISTRY }}:5000
             DOCKER_REGISTRY=$DOCKER_REGISTRY docker compose pull
             DOCKER_REGISTRY=$DOCKER_REGISTRY docker compose up -d --no-build
             docker logout ${{ secrets.REGISTRY }}:5000
             docker exec wish-nginx nginx -s reload || docker restart wish-nginx
-            docker exec wish-storybook nginx -s reload
+            docker exec wish-storybook nginx -s reload || true
             docker compose ps
             docker compose logs --tail=30 api db || true
         env:

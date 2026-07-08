@@ -20,8 +20,6 @@ import { AuthShell } from '../AuthShell/AuthShell';
 const AUTH_ERROR_CODES = [
 	'email_taken',
 	'invalid_credentials',
-	'oauth_failed',
-	'google_oauth_disabled',
 	'code_rate_limited',
 	'code_expired',
 	'invalid_code',
@@ -65,7 +63,7 @@ function restoreDraftFromStorage(
 	return true;
 }
 
-export function RegisterForm({ googleOAuthEnabled = false }: Readonly<{ googleOAuthEnabled?: boolean }>) {
+export function RegisterForm() {
 	const router = useRouter();
 	const locale = useLocale();
 	const t = useTranslations('auth');
@@ -204,10 +202,7 @@ export function RegisterForm({ googleOAuthEnabled = false }: Readonly<{ googleOA
 	}
 
 	return (
-		<AuthShell
-			error={error}
-			googleOAuthEnabled={googleOAuthEnabled}
-		>
+		<AuthShell error={error}>
 			<form onSubmit={step === 'email' ? handleSendCode : handleVerify}>
 				<h1>{step === 'email' ? t('registerTitle') : t('codeStepTitle')}</h1>
 

@@ -4,735 +4,635 @@
  */
 
 export interface paths {
-    "/api/health": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Health check
-         * @description Liveness probe for load balancers and monitoring.
-         */
-        get: operations["health_api_health_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/register": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Register with email and password
-         * @description Create an account and start a session (sets the `wish_session` cookie).
-         */
-        post: operations["register_api_auth_register_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/email/send-code": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Send registration verification code
-         * @description Send a 6-digit code to the given email. Returns `Retry-After` (seconds until resend).
-         */
-        post: operations["send_email_code_api_auth_email_send_code_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/email/verify-register": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Verify code and register
-         * @description Verify the email code, create the account, and start a session.
-         */
-        post: operations["verify_email_register_api_auth_email_verify_register_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/login": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Login with email and password
-         * @description Authenticate and start a session (sets the `wish_session` cookie).
-         */
-        post: operations["login_api_auth_login_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/logout": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Logout
-         * @description Invalidate the current session and clear the session cookie.
-         */
-        post: operations["logout_api_auth_logout_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/me": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Current user
-         * @description Return the authenticated user from the session cookie.
-         */
-        get: operations["me_api_auth_me_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/config": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Auth feature flags
-         * @description Public auth configuration for the frontend (e.g. whether Google OAuth is enabled).
-         */
-        get: operations["auth_config_api_auth_config_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/google": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Start Google OAuth
-         * @description Redirect the browser to Google OAuth. Callback: `GET /api/auth/google/callback`.
-         */
-        get: operations["google_login_api_auth_google_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
+	'/api/health': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * Health check
+		 * @description Liveness probe for load balancers and monitoring.
+		 */
+		get: operations['health_api_health_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/api/auth/register': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/**
+		 * Register with email and password
+		 * @description Create an account and start a session (sets the `wish_session` cookie).
+		 */
+		post: operations['register_api_auth_register_post'];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/api/auth/email/send-code': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/**
+		 * Send registration verification code
+		 * @description Send a 6-digit code to the given email. Returns `Retry-After` (seconds until resend).
+		 */
+		post: operations['send_email_code_api_auth_email_send_code_post'];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/api/auth/email/verify-register': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/**
+		 * Verify code and register
+		 * @description Verify the email code, create the account, and start a session.
+		 */
+		post: operations['verify_email_register_api_auth_email_verify_register_post'];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/api/auth/login': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/**
+		 * Login with email and password
+		 * @description Authenticate and start a session (sets the `wish_session` cookie).
+		 */
+		post: operations['login_api_auth_login_post'];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/api/auth/logout': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/**
+		 * Logout
+		 * @description Invalidate the current session and clear the session cookie.
+		 */
+		post: operations['logout_api_auth_logout_post'];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/api/auth/me': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * Current user
+		 * @description Return the authenticated user from the session cookie.
+		 */
+		get: operations['me_api_auth_me_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: {
-        /** AuthConfigResponse */
-        AuthConfigResponse: {
-            /**
-             * Google Oauth Enabled
-             * @description Whether Google OAuth login is configured
-             */
-            google_oauth_enabled: boolean;
-        };
-        /** HTTPValidationError */
-        HTTPValidationError: {
-            /** Detail */
-            detail?: components["schemas"]["ValidationError"][];
-        };
-        /** HealthResponse */
-        HealthResponse: {
-            /**
-             * Status
-             * @description Service status
-             * @example ok
-             */
-            status: string;
-        };
-        /** LoginRequest */
-        LoginRequest: {
-            /**
-             * Email
-             * Format: email
-             * @description Account email address
-             */
-            email: string;
-            /**
-             * Password
-             * @description Account password
-             */
-            password: string;
-        };
-        /** RegisterRequest */
-        RegisterRequest: {
-            /**
-             * Email
-             * Format: email
-             * @description Account email address
-             */
-            email: string;
-            /**
-             * Password
-             * @description At least 8 characters
-             */
-            password: string;
-            /**
-             * Display Name
-             * @description Optional display name
-             */
-            display_name?: string | null;
-        };
-        /** SendEmailCodeRequest */
-        SendEmailCodeRequest: {
-            /**
-             * Email
-             * Format: email
-             * @description Email to send the registration code to
-             */
-            email: string;
-            /**
-             * Locale
-             * @description Email language: `ru` or `en`
-             * @default ru
-             */
-            locale: string;
-        };
-        /** UserResponse */
-        UserResponse: {
-            /**
-             * Id
-             * @description User UUID
-             */
-            id: string;
-            /**
-             * Email
-             * @description Primary email
-             */
-            email: string | null;
-            /**
-             * Display Name
-             * @description Display name shown in the UI
-             */
-            display_name: string | null;
-            /**
-             * Avatar Url
-             * @description Profile image URL
-             */
-            avatar_url: string | null;
-        };
-        /** ValidationError */
-        ValidationError: {
-            /** Location */
-            loc: (string | number)[];
-            /** Message */
-            msg: string;
-            /** Error Type */
-            type: string;
-            /** Input */
-            input?: unknown;
-            /** Context */
-            ctx?: Record<string, never>;
-        };
-        /** VerifyEmailCodeRequest */
-        VerifyEmailCodeRequest: {
-            /**
-             * Email
-             * Format: email
-             * @description Same email used in send-code
-             */
-            email: string;
-            /**
-             * Code
-             * @description 6-digit verification code from email
-             */
-            code: string;
-            /**
-             * Password
-             * @description Password for the new account
-             */
-            password: string;
-            /**
-             * Display Name
-             * @description Optional display name
-             */
-            display_name?: string | null;
-        };
-    };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+	schemas: {
+		/** HTTPValidationError */
+		HTTPValidationError: {
+			/** Detail */
+			detail?: components['schemas']['ValidationError'][];
+		};
+		/** HealthResponse */
+		HealthResponse: {
+			/**
+			 * Status
+			 * @description Service status
+			 * @example ok
+			 */
+			status: string;
+		};
+		/** LoginRequest */
+		LoginRequest: {
+			/**
+			 * Email
+			 * Format: email
+			 * @description Account email address
+			 */
+			email: string;
+			/**
+			 * Password
+			 * @description Account password
+			 */
+			password: string;
+		};
+		/** RegisterRequest */
+		RegisterRequest: {
+			/**
+			 * Email
+			 * Format: email
+			 * @description Account email address
+			 */
+			email: string;
+			/**
+			 * Password
+			 * @description At least 8 characters
+			 */
+			password: string;
+			/**
+			 * Display Name
+			 * @description Optional display name
+			 */
+			display_name?: string | null;
+		};
+		/** SendEmailCodeRequest */
+		SendEmailCodeRequest: {
+			/**
+			 * Email
+			 * Format: email
+			 * @description Email to send the registration code to
+			 */
+			email: string;
+			/**
+			 * Locale
+			 * @description Email language: `ru` or `en`
+			 * @default ru
+			 */
+			locale: string;
+		};
+		/** UserResponse */
+		UserResponse: {
+			/**
+			 * Id
+			 * @description User UUID
+			 */
+			id: string;
+			/**
+			 * Email
+			 * @description Primary email
+			 */
+			email: string | null;
+			/**
+			 * Display Name
+			 * @description Display name shown in the UI
+			 */
+			display_name: string | null;
+			/**
+			 * Avatar Url
+			 * @description Profile image URL
+			 */
+			avatar_url: string | null;
+		};
+		/** ValidationError */
+		ValidationError: {
+			/** Location */
+			loc: (string | number)[];
+			/** Message */
+			msg: string;
+			/** Error Type */
+			type: string;
+			/** Input */
+			input?: unknown;
+			/** Context */
+			ctx?: Record<string, never>;
+		};
+		/** VerifyEmailCodeRequest */
+		VerifyEmailCodeRequest: {
+			/**
+			 * Email
+			 * Format: email
+			 * @description Same email used in send-code
+			 */
+			email: string;
+			/**
+			 * Code
+			 * @description 6-digit verification code from email
+			 */
+			code: string;
+			/**
+			 * Password
+			 * @description Password for the new account
+			 */
+			password: string;
+			/**
+			 * Display Name
+			 * @description Optional display name
+			 */
+			display_name?: string | null;
+		};
+	};
+	responses: never;
+	parameters: never;
+	requestBodies: never;
+	headers: never;
+	pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    health_api_health_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HealthResponse"];
-                };
-            };
-        };
-    };
-    register_api_auth_register_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["RegisterRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserResponse"];
-                };
-            };
-            /** @description Invalid credentials or missing session */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /**
-                     * @example {
-                     *       "detail": "invalid_credentials"
-                     *     }
-                     */
-                    "application/json": unknown;
-                };
-            };
-            /** @description Email already registered */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /**
-                     * @example {
-                     *       "detail": "email_taken"
-                     *     }
-                     */
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    send_email_code_api_auth_email_send_code_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SendEmailCodeRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Invalid, expired, or exhausted verification code */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /**
-                     * @example {
-                     *       "detail": "invalid_code"
-                     *     }
-                     */
-                    "application/json": unknown;
-                };
-            };
-            /** @description Email already registered */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /**
-                     * @example {
-                     *       "detail": "email_taken"
-                     *     }
-                     */
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-            /** @description Resend rate limit (see `Retry-After` header) */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /**
-                     * @example {
-                     *       "detail": "code_rate_limited"
-                     *     }
-                     */
-                    "application/json": unknown;
-                };
-            };
-            /** @description SMTP delivery failed */
-            503: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /**
-                     * @example {
-                     *       "detail": "email_delivery_failed"
-                     *     }
-                     */
-                    "application/json": unknown;
-                };
-            };
-        };
-    };
-    verify_email_register_api_auth_email_verify_register_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["VerifyEmailCodeRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserResponse"];
-                };
-            };
-            /** @description Invalid, expired, or exhausted verification code */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /**
-                     * @example {
-                     *       "detail": "invalid_code"
-                     *     }
-                     */
-                    "application/json": unknown;
-                };
-            };
-            /** @description Email already registered */
-            409: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /**
-                     * @example {
-                     *       "detail": "email_taken"
-                     *     }
-                     */
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-            /** @description Resend rate limit (see `Retry-After` header) */
-            429: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /**
-                     * @example {
-                     *       "detail": "code_rate_limited"
-                     *     }
-                     */
-                    "application/json": unknown;
-                };
-            };
-            /** @description SMTP delivery failed */
-            503: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /**
-                     * @example {
-                     *       "detail": "email_delivery_failed"
-                     *     }
-                     */
-                    "application/json": unknown;
-                };
-            };
-        };
-    };
-    login_api_auth_login_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["LoginRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserResponse"];
-                };
-            };
-            /** @description Invalid credentials or missing session */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /**
-                     * @example {
-                     *       "detail": "invalid_credentials"
-                     *     }
-                     */
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    logout_api_auth_logout_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    me_api_auth_me_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserResponse"];
-                };
-            };
-            /** @description Invalid credentials or missing session */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    /**
-                     * @example {
-                     *       "detail": "invalid_credentials"
-                     *     }
-                     */
-                    "application/json": unknown;
-                };
-            };
-        };
-    };
-    auth_config_api_auth_config_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AuthConfigResponse"];
-                };
-            };
-        };
-    };
-    google_login_api_auth_google_get: {
-        parameters: {
-            query?: {
-                /** @description Frontend locale passed through OAuth state */
-                locale?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
+	health_api_health_get: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HealthResponse'];
+				};
+			};
+		};
+	};
+	register_api_auth_register_post: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['RegisterRequest'];
+			};
+		};
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['UserResponse'];
+				};
+			};
+			/** @description Invalid credentials or missing session */
+			401: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					/**
+					 * @example {
+					 *       "detail": "invalid_credentials"
+					 *     }
+					 */
+					'application/json': unknown;
+				};
+			};
+			/** @description Email already registered */
+			409: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					/**
+					 * @example {
+					 *       "detail": "email_taken"
+					 *     }
+					 */
+					'application/json': unknown;
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
+	send_email_code_api_auth_email_send_code_post: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['SendEmailCodeRequest'];
+			};
+		};
+		responses: {
+			/** @description Successful Response */
+			204: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Invalid, expired, or exhausted verification code */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					/**
+					 * @example {
+					 *       "detail": "invalid_code"
+					 *     }
+					 */
+					'application/json': unknown;
+				};
+			};
+			/** @description Email already registered */
+			409: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					/**
+					 * @example {
+					 *       "detail": "email_taken"
+					 *     }
+					 */
+					'application/json': unknown;
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+			/** @description Resend rate limit (see `Retry-After` header) */
+			429: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					/**
+					 * @example {
+					 *       "detail": "code_rate_limited"
+					 *     }
+					 */
+					'application/json': unknown;
+				};
+			};
+			/** @description SMTP delivery failed */
+			503: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					/**
+					 * @example {
+					 *       "detail": "email_delivery_failed"
+					 *     }
+					 */
+					'application/json': unknown;
+				};
+			};
+		};
+	};
+	verify_email_register_api_auth_email_verify_register_post: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['VerifyEmailCodeRequest'];
+			};
+		};
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['UserResponse'];
+				};
+			};
+			/** @description Invalid, expired, or exhausted verification code */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					/**
+					 * @example {
+					 *       "detail": "invalid_code"
+					 *     }
+					 */
+					'application/json': unknown;
+				};
+			};
+			/** @description Email already registered */
+			409: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					/**
+					 * @example {
+					 *       "detail": "email_taken"
+					 *     }
+					 */
+					'application/json': unknown;
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+			/** @description Resend rate limit (see `Retry-After` header) */
+			429: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					/**
+					 * @example {
+					 *       "detail": "code_rate_limited"
+					 *     }
+					 */
+					'application/json': unknown;
+				};
+			};
+			/** @description SMTP delivery failed */
+			503: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					/**
+					 * @example {
+					 *       "detail": "email_delivery_failed"
+					 *     }
+					 */
+					'application/json': unknown;
+				};
+			};
+		};
+	};
+	login_api_auth_login_post: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['LoginRequest'];
+			};
+		};
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['UserResponse'];
+				};
+			};
+			/** @description Invalid credentials or missing session */
+			401: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					/**
+					 * @example {
+					 *       "detail": "invalid_credentials"
+					 *     }
+					 */
+					'application/json': unknown;
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
+	logout_api_auth_logout_post: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			204: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	me_api_auth_me_get: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['UserResponse'];
+				};
+			};
+			/** @description Invalid credentials or missing session */
+			401: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					/**
+					 * @example {
+					 *       "detail": "invalid_credentials"
+					 *     }
+					 */
+					'application/json': unknown;
+				};
+			};
+		};
+	};
 }
